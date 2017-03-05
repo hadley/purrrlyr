@@ -1,4 +1,4 @@
-# purrr
+# purrrlyr
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/purrrlyr)](http://cran.r-project.org/package=purrrlyr)
 [![Build Status](https://travis-ci.org/hadley/purrrlyr.svg?branch=master)](https://travis-ci.org/hadley/purrrlyr)
