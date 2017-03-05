@@ -1,19 +1,19 @@
-Package: purrr
-Title: Functional Programming Tools
-Version: 0.2.2.9000
+Package: purrrlyr
+Title: Tools at the intersection of purrr and dplyr
+Version: 0.0.0.9000
 Authors@R: c(
     person("Hadley", "Wickham", , "hadley@rstudio.com", c("aut", "cre")),
     person("Lionel", "Henry", , "lionel.hry@gmail.com", "ctb"),
     person("RStudio", role = "cph")
     )
-Description: Make your pure functions purr with the 'purrr' package. This
-    package completes R's functional programming tools with missing features
-    present in other programming languages.
+Description: Some functions at the intersection of dplyr and purrr that 
+  formerly lived in purrr.
 License: GPL-3 | file LICENSE
 LazyData: true
 Imports:
     magrittr (>= 1.5),
     dplyr (>= 0.4.3),
+    purrr,
     Rcpp,
     lazyeval (>= 0.2.0.9000)
 Suggests:
@@ -21,8 +21,8 @@ Suggests:
     covr
 LinkingTo: Rcpp,
     BH
-URL: https://github.com/hadley/purrr
-BugReports: https://github.com/hadley/purrr/issues
+URL: https://github.com/hadley/purrrlyr
+BugReports: https://github.com/hadley/purrrlyr/issues
 RoxygenNote: 6.0.1
 Remotes: hadley/lazyeval
 Roxygen: list(markdown = TRUE)

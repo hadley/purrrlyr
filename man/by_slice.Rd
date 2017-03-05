@@ -56,7 +56,7 @@ of rows for each variable mapped on.
 # in a list-column.
 mtcars \%>\%
   slice_rows("cyl") \%>\%
-  by_slice(partial(lm, mpg ~ disp))
+  by_slice(purrr::partial(lm, mpg ~ disp))
 
 # by_slice() is especially useful in combination with map().
 
@@ -79,9 +79,9 @@ df \%>\% dmap(mean)
 # .labels to FALSE:
 mtcars \%>\%
   slice_rows("cyl") \%>\%
-  by_slice(partial(lm, mpg ~ disp), .labels = FALSE) \%>\%
-  flatten() \%>\%
-  map(coef)
+  by_slice(purrr::partial(lm, mpg ~ disp), .labels = FALSE) \%>\%
+  purrr::flatten() \%>\%
+  purrr::map(coef)
 }
 \seealso{
 \code{\link[=by_row]{by_row()}}, \code{\link[=slice_rows]{slice_rows()}},

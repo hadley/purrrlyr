@@ -34,7 +34,7 @@
 #' @seealso [by_row()], [slice_rows()],
 #'   [dmap()]
 #' @importFrom Rcpp sourceCpp
-#' @useDynLib purrr by_slice_impl
+#' @useDynLib purrrlyr by_slice_impl map_impl map_by_slice_impl
 #' @export
 #' @examples
 #' # Here we fit a regression model inside each slice defined by the
@@ -42,7 +42,7 @@
 #' # in a list-column.
 #' mtcars %>%
 #'   slice_rows("cyl") %>%
-#'   by_slice(partial(lm, mpg ~ disp))
+#'   by_slice(purrr::partial(lm, mpg ~ disp))
 #'
 #' # by_slice() is especially useful in combination with map().
 #'
@@ -65,9 +65,9 @@
 #' # .labels to FALSE:
 #' mtcars %>%
 #'   slice_rows("cyl") %>%
-#'   by_slice(partial(lm, mpg ~ disp), .labels = FALSE) %>%
-#'   flatten() %>%
-#'   map(coef)
+#'   by_slice(purrr::partial(lm, mpg ~ disp), .labels = FALSE) %>%
+#'   purrr::flatten() %>%
+#'   purrr::map(coef)
 by_slice <- function(.d, ..f, ..., .collate = c("list", "rows", "cols"),
                      .to = ".out", .labels = TRUE) {
   message("by_slice() is deprecated. Please use the new colwise family in dplyr.\n",
@@ -90,7 +90,7 @@ by_slice <- function(.d, ..f, ..., .collate = c("list", "rows", "cols"),
 # Prevents as_function() from transforming to a plucking function
 as_rows_function <- function(f, f_name = ".f") {
   if (inherits(f, "formula")) {
-    as_function(f)
+    purrr::as_function(f)
   } else if (!is.function(f)) {
     stop(f_name, " should be a function or a formula", call. = FALSE)
   } else {
@@ -152,7 +152,7 @@ set_sliced_env <- function(df, labels, collate, to, env, x_name) {
 #' @inheritParams by_slice
 #' @return A data frame.
 #' @seealso [by_slice()]
-#' @useDynLib purrr invoke_rows_impl
+#' @useDynLib purrrlyr invoke_rows_impl
 #' @export
 #' @examples
 #' # ..f should be able to work with a list or a data frame. As it
@@ -161,13 +161,13 @@ set_sliced_env <- function(df, labels, collate, to, env, x_name) {
 #'
 #' # Other functions such as mean() may need to be adjusted with one
 #' # of the lift_xy() helpers:
-#' mtcars %>% by_row(lift_vl(mean))
+#' mtcars %>% by_row(purrr::lift_vl(mean))
 #'
 #' # To run a function with invoke_rows(), make sure it is variadic (that
 #' # it accepts dots) or that .f's signature is compatible with the
 #' # column names
 #' mtcars %>% invoke_rows(.f = sum)
-#' mtcars %>% invoke_rows(.f = lift_vd(mean))
+#' mtcars %>% invoke_rows(.f = purrr::lift_vd(mean))
 #'
 #' # invoke_rows() with cols collation is equivalent to plyr::mdply()
 #' p <- expand.grid(mean = 1:5, sd = seq(0, 1, length = 10))

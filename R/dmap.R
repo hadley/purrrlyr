@@ -1,13 +1,13 @@
 #' Map over the columns of a data frame
 #'
-#' `dmap()` is just like [map()] but always returns a
+#' `dmap()` is just like [purrr::map()] but always returns a
 #' data frame. In addition, it handles grouped or sliced data frames.
 #'
 #' `dmap_at()` and `dmap_if()` recycle length 1 vectors to
 #' the group sizes.
-#' @inheritParams map
-#' @inheritParams as_function
-#' @inheritParams conditional-map
+#' @inheritParams purrr::map
+#' @inheritParams purrr::as_function
+#' @inheritParams purrr::map_if
 #' @param .d A data frame.
 #' @export
 #' @examples
@@ -25,7 +25,7 @@
 dmap <- function(.d, .f, ...) {
   message("dmap() is deprecated. Please use the new colwise family in dplyr.\n",
     "E.g., summarise_all(), mutate_all(), etc.")
-  .f <- as_function(.f, ...)
+  .f <- purrr::as_function(.f, ...)
   if (dplyr::is.grouped_df(.d)) {
     sliced_dmap(.d, .f, ...)
   } else {
@@ -59,7 +59,7 @@ dmap_at <- function(.d, .at, .f, ...) {
 dmap_if <- function(.d, .p, .f, ...) {
   message("dmap_if() is deprecated. Please use the new colwise family in dplyr.\n",
     "E.g., summarise_if(), mutate_if(), etc.")
-  sel <- map_lgl(.d, .p)
+  sel <- purrr::map_lgl(.d, .p)
   partial_dmap(.d, sel, .f, ...)
 }
 
@@ -95,8 +95,8 @@ dmap_recycle_sliced <- function(res, d) {
 
   if (nrow(attr(d, "labels")) == nrow(res)) {
     sizes <- attr(d, "group_sizes")
-    indices <- map2(seq_len(nrow(res)), sizes, ~rep(.x, each = .y))
-    res <- res[flatten_int(indices), ]
+    indices <- purrr::map2(seq_len(nrow(res)), sizes, ~rep(.x, each = .y))
+    res <- res[purrr::flatten_int(indices), ]
     return(res)
   }
 

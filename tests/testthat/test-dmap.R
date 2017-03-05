@@ -28,7 +28,7 @@ test_that("conditional sliced mapping recycles within groups", {
   res_at <- dmap_at(df, c("disp", "drat"), mean)
   res_if <- dmap_if(df, ~ .x[[1]] == 160, mean)
 
-  expected <- map2(expected_df$disp, attr(df, "group_sizes"), rep) %>% flatten_dbl()
+  expected <- purrr::map2(expected_df$disp, attr(df, "group_sizes"), rep) %>% purrr::flatten_dbl()
   expect_equal(res_at$disp, expected)
   expect_equal(res_if$disp, expected)
 })

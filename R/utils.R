@@ -8,153 +8,10 @@
 #' @usage lhs \%>\% rhs
 NULL
 
-
-#' Modify a list
-#'
-#' @param _data A list.
-#' @param ... New values of a list. Use `NULL` to remove values.
-#'   Use a formula to evaluate in the context of the list values.
-#' @export
-#' @examples
-#' x <- list(x = 1:10, y = 4)
-#' update_list(x, z = 10)
-#' update_list(x, z = ~ x + y)
-update_list <- function(`_data`, ...) {
-  new_values <- list(...)
-
-  is_formula <- map_lgl(new_values, ~inherits(., "formula"))
-
-  new_values[is_formula] <- lapply(new_values[is_formula], function(f) {
-    stopifnot(length(f) == 2)
-    eval(f[[2]], `_data`, environment(f))
-  })
-
-  utils::modifyList(`_data`, new_values)
-}
-
-#' Convert an object into a function
-#'
-#' `as_function` is the powerhouse behind the varied function
-#' specifications that most purrr functions allow. It is an S3 generic.
-#'
-#' @param .f A function, formula, or atomic vector.
-#'
-#'   If a __function__, it is used as is.
-#'
-#'   If a __formula__, e.g. `~ .x + 2`, it is converted to a
-#'   function with one or two arguments, `.x` or `.`, and `.y`. This
-#'   allows you to create very compact anonymous functions with up to
-#'   two inputs.
-#'
-#'   If __character vector__, __numeric vector__, or __list__, it
-#'   is converted to an extractor function. Character vectors index by name
-#'   and numeric vectors index by position; use a list to index by position
-#'   and name at different levels. If a component is not present, the
-#'   value of `.null` will be returned.
-#' @param .null Optional additional argument for extractor functions
-#'   (i.e. when `.f` is character, integer, or list). Returned when
-#'   value does not exist or is `NULL`.
-#' @param ... Additional arguments passed on to methods.
-#' @export
-#' @examples
-#' as_function(~ . + 1)
-#' as_function(1)
-#'
-#' as_function(c("a", "b", "c"))
-#' # Equivalent to function(x) x[["a"]][["b"]][["c"]]
-#'
-#' as_function(list(1, "a", 2))
-#' # Equivalent to function(x) x[[1]][["a"]][[2]]
-#'
-#' as_function(c("a", "b", "c"), .null = NA)
-as_function <- function(.f, ...) {
-  UseMethod("as_function")
-}
-
-#' @export
-#' @rdname as_function
-as_function.function <- function(.f, ...) .f
-
-#' @export
-#' @rdname as_function
-as_function.formula <- function(.f, ...) {
-  .x <- NULL # hush R CMD check NOTE
-
-  if (length(.f) != 2) {
-    stop("Formula must be one sided", call. = FALSE)
-  }
-  make_function(alist(.x = , .y = , . = .x), .f[[2]], environment(.f))
-}
-
-
-#' @useDynLib purrr extract_impl
-extract <- function(x, index, .null = NULL) {
-  .Call(extract_impl, x, index, .null)
-}
-
-#' @export
-#' @rdname as_function
-as_function.character <- function(.f, ..., .null = NULL) {
-  as_function(as.list(.f), ..., .null = .null)
-}
-
-#' @export
-#' @rdname as_function
-as_function.numeric <- function(.f, ..., .null = NULL) {
-  as_function(as.list(.f), ..., .null = .null)
-}
-
-#' @export
-#' @rdname as_function
-as_function.list <- function(.f, ..., .null = NULL) {
-  idx <- .f
-  function(g, ...) {
-    extract(g, idx, .null)
-  }
-}
-
-#' @export
-as_function.default <- function(.f, ...) {
-  stop("Don't know how to convert ", paste0(class(.f), collapse = "/"),
-       " into a function", call. = FALSE)
-}
-
-
-maybe_as_data_frame <- function(out, x) {
-  if (is.data.frame(x)) {
-    dplyr::as_data_frame(out)
-  } else {
-    out
-  }
-}
-
-recycle_args <- function(args) {
-  lengths <- map_int(args, length)
-  n <- max(lengths)
-
-  stopifnot(all(lengths == 1L | lengths == n))
-  to_recycle <- lengths == 1L
-  args[to_recycle] <- lapply(args[to_recycle], function(x) rep.int(x, n))
-  args
-}
-
 names2 <- function(x) {
   names(x) %||% rep("", length(x))
 }
 
-#' Default value for `NULL`.
-#'
-#' This infix function makes it easy to replace `NULL`s with a
-#' default value. It's inspired by the way that Ruby's or operation (`||`)
-#' works.
-#'
-#' @param x,y If `x` is NULL, will return `y`; otherwise returns
-#'   `x`.
-#' @export
-#' @name null-default
-#' @examples
-#' 1 %||% 2
-#' NULL %||% 2
 `%||%` <- function(x, y) {
   if (is.null(x)) {
     y
@@ -163,62 +20,21 @@ names2 <- function(x) {
   }
 }
 
-#' Infix attribute accessor
-#'
-#' @param x Object
-#' @param name Attribute name
-#' @export
-#' @name get-attr
-#' @examples
-#' factor(1:3) %@% "levels"
-#' mtcars %@% "class"
-`%@%` <- function(x, name) attr(x, name, exact = TRUE)
-
-
-#' Generate random samples from a Bernoulli distribution
-#'
-#' @param n Number of samples
-#' @param p Probability of getting `TRUE`
-#' @return A logical vector
-#' @export
-#' @examples
-#' rbernoulli(10)
-#' rbernoulli(100, 0.1)
-rbernoulli <- function(n, p = 0.5) {
-  sample(c(TRUE, FALSE), n, replace = TRUE, prob = c(p, 1 - p))
-}
-
-#' Generate random samples from a discrete uniform distribution
-#'
-#' @param n Number of samples to draw.
-#' @param a,b Range of the distribution (inclusive).
-#' @export
-#' @examples
-#' table(rdunif(1e3, 10))
-#' table(rdunif(1e3, 10, -5))
-rdunif <- function(n, b, a = 1) {
-  stopifnot(is.numeric(a), length(a) == 1)
-  stopifnot(is.numeric(b), length(b) == 1)
-
-  a1 <- min(a, b)
-  b1 <- max(a, b)
-
-  sample(b1 - a1 + 1, n, replace = TRUE) + a1 - 1
-}
-
-# magrittr placeholder
-globalVariables(".")
-
-
-has_names <- function(x) {
-  nms <- names(x)
-  if (is.null(nms)) {
-    rep_along(x, FALSE)
-  } else {
-    !(is.na(nms) | nms == "")
-  }
-}
-
 isFALSE <- function(x) identical(x, FALSE)
 
 ndots <- function(...) nargs()
+
+inv_which <- function(x, sel) {
+  if (is.character(sel)) {
+    names <- names(x)
+    if (is.null(names)) {
+      stop("character indexing requires a named object", call. = FALSE)
+    }
+    names %in% sel
+  } else if (is.numeric(sel)) {
+    seq_along(x) %in% sel
+  } else {
+    stop("unrecognised index type", call. = FALSE)
+  }
+}
+
