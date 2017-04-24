@@ -17,18 +17,24 @@ dmap_if(.d, .p, .f, ...)
 
 \item{.f}{A function, formula, or atomic vector.
 
-  If a \strong{function}, it is used as is.
+If a \strong{function}, it is used as is.
 
-  If a \strong{formula}, e.g. \code{~ .x + 2}, it is converted to a
-  function with two arguments, \code{.x} or \code{.} and \code{.y}. This
-  allows you to create very compact anonymous functions with up to
-  two inputs.
+If a \strong{formula}, e.g. \code{~ .x + 2}, it is converted to a function. There
+are three ways to refer to the arguments:
+\itemize{
+\item For a single argument function, use \code{.}
+\item For a two argument function, use \code{.x} and \code{.y}
+\item For more arguments, use \code{..1}, \code{..2}, \code{..3} etc
+}
 
-  If \strong{character} or \strong{integer vector}, e.g. \code{"y"}, it
-  is converted to an extractor function, \code{function(x) x[["y"]]}. To
-  index deeply into a nested list, use multiple values; \code{c("x", "y")}
-  is equivalent to \code{z[["x"]][["y"]]}. You can also set \code{.null}
-  to set a default to use instead of \code{NULL} for absent components.}
+This syntax allows you to create very compact anonymous functions.
+
+If \strong{character vector}, \strong{numeric vector}, or \strong{list}, it
+is converted to an extractor function. Character vectors index by name
+and numeric vectors index by position; use a list to index by position
+and name at different levels. Within a list, wrap strings in \code{get_attr()}
+to extract named attributes. If a component is not present, the value of
+\code{.default} will be returned.}
 
 \item{...}{Additional arguments passed on to \code{.f}.}
 
