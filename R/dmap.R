@@ -25,7 +25,7 @@
 dmap <- function(.d, .f, ...) {
   deprecate("dmap() is deprecated. Please use the new colwise family in dplyr.\n",
     "E.g., summarise_all(), mutate_all(), etc.")
-  .f <- purrr::as_function(.f, ...)
+  .f <- as_function(.f, ...)
   if (dplyr::is.grouped_df(.d)) {
     sliced_dmap(.d, .f, ...)
   } else {

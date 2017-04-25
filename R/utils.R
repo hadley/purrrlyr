@@ -41,3 +41,11 @@ inv_which <- function(x, sel) {
 deprecate <- function(...) {
   # No message for now
 }
+
+as_function <- function(...) {
+  if (packageVersion("purrr") > "0.2.2") {
+    purrr::as_mapper(...)
+  } else {
+    purrr::as_function(...)
+  }
+}

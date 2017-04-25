@@ -90,7 +90,7 @@ by_slice <- function(.d, ..f, ..., .collate = c("list", "rows", "cols"),
 # Prevents as_function() from transforming to a plucking function
 as_rows_function <- function(f, f_name = ".f") {
   if (inherits(f, "formula")) {
-    purrr::as_function(f)
+    as_function(f)
   } else if (!is.function(f)) {
     stop(f_name, " should be a function or a formula", call. = FALSE)
   } else {
