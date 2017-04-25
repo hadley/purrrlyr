@@ -34,7 +34,6 @@
 #' @seealso [by_row()], [slice_rows()],
 #'   [dmap()]
 #' @importFrom Rcpp sourceCpp
-#' @useDynLib purrrlyr by_slice_impl map_impl map_by_slice_impl
 #' @export
 #' @examples
 #' # Here we fit a regression model inside each slice defined by the
@@ -152,7 +151,6 @@ set_sliced_env <- function(df, labels, collate, to, env, x_name) {
 #' @inheritParams by_slice
 #' @return A data frame.
 #' @seealso [by_slice()]
-#' @useDynLib purrrlyr invoke_rows_impl
 #' @export
 #' @examples
 #' # ..f should be able to work with a list or a data frame. As it
