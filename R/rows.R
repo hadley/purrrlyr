@@ -128,7 +128,7 @@ set_sliced_env <- function(df, labels, collate, to, env, x_name) {
 #' `invoke_rows()` is intended to provide a version of
 #' `pmap()` for data frames. Its default collation method is
 #' `"cols"`, which makes it equivalent to
-#' [plyr::mdply()] from the plyr package. Note that
+#' `mdply()`` from the plyr package. Note that
 #' `invoke_rows()` follows the signature pattern of the
 #' `invoke` family of functions and takes `.f` as its first
 #' argument.
