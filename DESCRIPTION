@@ -6,8 +6,8 @@ Authors@R: c(
     person("Lionel", "Henry", , "lionel.hry@gmail.com", "ctb"),
     person("RStudio", role = "cph")
     )
-Description: Some functions at the intersection of dplyr and purrr that 
-  formerly lived in purrr.
+Description: Some functions at the intersection of 'dplyr' and 'purrr' that 
+  formerly lived in 'purrr'.
 License: GPL-3 | file LICENSE
 LazyData: true
 Imports:
