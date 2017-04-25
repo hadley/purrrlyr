@@ -38,3 +38,6 @@ inv_which <- function(x, sel) {
   }
 }
 
+deprecate <- function(...) {
+  # No message for now
+}

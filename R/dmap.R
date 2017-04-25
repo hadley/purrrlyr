@@ -23,7 +23,7 @@
 #' # with 'rows' collation of results:
 #' sliced_df %>% by_slice(dmap, mean, .collate = "rows")
 dmap <- function(.d, .f, ...) {
-  message("dmap() is deprecated. Please use the new colwise family in dplyr.\n",
+  deprecate("dmap() is deprecated. Please use the new colwise family in dplyr.\n",
     "E.g., summarise_all(), mutate_all(), etc.")
   .f <- purrr::as_function(.f, ...)
   if (dplyr::is.grouped_df(.d)) {
@@ -48,7 +48,7 @@ sliced_dmap <- function(.d, .f, ...) {
 #' @rdname dmap
 #' @export
 dmap_at <- function(.d, .at, .f, ...) {
-  message("dmap_at() is deprecated. Please use the new colwise family in dplyr.\n",
+  deprecate("dmap_at() is deprecated. Please use the new colwise family in dplyr.\n",
     "E.g., summarise_at(), mutate_at(), etc.")
   sel <- inv_which(.d, .at)
   partial_dmap(.d, sel, .f, ...)
@@ -57,7 +57,7 @@ dmap_at <- function(.d, .at, .f, ...) {
 #' @rdname dmap
 #' @export
 dmap_if <- function(.d, .p, .f, ...) {
-  message("dmap_if() is deprecated. Please use the new colwise family in dplyr.\n",
+  deprecate("dmap_if() is deprecated. Please use the new colwise family in dplyr.\n",
     "E.g., summarise_if(), mutate_if(), etc.")
   sel <- purrr::map_lgl(.d, .p)
   partial_dmap(.d, sel, .f, ...)
