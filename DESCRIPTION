@@ -15,7 +15,7 @@ Imports:
     dplyr (>= 0.4.3),
     purrr,
     Rcpp,
-    lazyeval (>= 0.2.0.9000)
+    lazyeval (>= 0.2.0)
 Suggests:
     testthat,
     covr
@@ -24,5 +24,4 @@ LinkingTo: Rcpp,
 URL: https://github.com/hadley/purrrlyr
 BugReports: https://github.com/hadley/purrrlyr/issues
 RoxygenNote: 6.0.1
-Remotes: hadley/lazyeval
 Roxygen: list(markdown = TRUE)
