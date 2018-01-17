@@ -56,7 +56,9 @@ identify the row number in the original data frame.
 \code{invoke_rows()} is intended to provide a version of
 \code{pmap()} for data frames. Its default collation method is
 \code{"cols"}, which makes it equivalent to
-\code{mdply()`` from the plyr package. Note that}invoke_rows()\code{follows the signature pattern of the}invoke\code{family of functions and takes}.f` as its first
+\code{mdply()} from the plyr package. Note that
+\code{invoke_rows()} follows the signature pattern of the
+\code{invoke} family of functions and takes \code{.f} as its first
 argument.
 
 The distinction between \code{by_row()} and \code{invoke_rows()} is
