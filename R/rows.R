@@ -285,13 +285,11 @@ unslice <- function(.d) {
 #' supply a factor as with `base::split()`.`
 #'
 #' @return A list of data frames
+#' @export
 #' @examples
 #' mtcars %>%
-#'  group_by(cyl) %>%
+#'  dplyr::group_by(cyl) %>%
 #'  split()
-#' @export
-#'
-#' @examples
 split.grouped_df <- function(x, ...){
   if (nargs() == 1) {
     split(as.data.frame(x), dplyr::group_indices(x))

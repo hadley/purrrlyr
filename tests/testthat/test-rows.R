@@ -236,7 +236,6 @@ test_that("error is thrown when no columns to map", {
 })
 
 test_that("split method for grouped_dfs", {
-  browser()
   cars_grouped <- dplyr::group_by(mtcars, cyl)
   split_list <- split(cars_grouped)
   expect_is(split_list, "list")
