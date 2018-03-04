@@ -278,5 +278,5 @@ unslice <- function(.d) {
 }
 
 split.grouped_df <- function(df){
-  split(df, group_indices(df))
+  split(as.data.frame(df), group_indices(df))
 }
