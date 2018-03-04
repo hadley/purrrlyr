@@ -276,3 +276,7 @@ unslice <- function(.d) {
   deprecate("`unslice()` is deprecated; please use `dplyr::ungroup()` instead.")
   dplyr::group_by_(.d, .dots = list())
 }
+
+split.grouped_df <- function(df){
+  split(df, group_indices(df))
+}
