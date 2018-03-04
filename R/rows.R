@@ -276,3 +276,25 @@ unslice <- function(.d) {
   deprecate("`unslice()` is deprecated; please use `dplyr::ungroup()` instead.")
   dplyr::group_by_(.d, .dots = list())
 }
+
+#' Split grouped_df
+#'
+#' Split a `grouped_df` according to its grouping variables.
+#' @param x A grouped_df
+#' @param ... Other arguments passed to `split`, if specified you must
+#' supply a factor as with `base::split()`.`
+#'
+#' @return A list of data frames
+#' @export
+#' @examples
+#' mtcars %>%
+#'  dplyr::group_by(cyl) %>%
+#'  split()
+split.grouped_df <- function(x, ...){
+  if (nargs() == 1) {
+    split(as.data.frame(x), dplyr::group_indices(x))
+  } else {
+    #use base split if extra arguments are passed
+    split(as.data.frame(x), ...)
+  }
+}

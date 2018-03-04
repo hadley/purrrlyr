@@ -234,3 +234,14 @@ test_that("error is thrown when no columns to map", {
   expect_error(dplyr::data_frame() %>% invoke_rows(.f = c), "empty")
   expect_error(dplyr::data_frame() %>% by_row(c), "empty")
 })
+
+test_that("split method for grouped_dfs", {
+  cars_grouped <- dplyr::group_by(mtcars, cyl)
+  split_list <- split(cars_grouped)
+  expect_is(split_list, "list")
+  expect_equal(length(split_list), 3)
+
+  #function behaves like `base::split` if additional arguments are specified
+  expect_identical(split(mtcars, mtcars$cyl),
+                   split(cars_grouped, cars_grouped$cyl))
+})
