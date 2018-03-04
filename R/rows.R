@@ -277,6 +277,11 @@ unslice <- function(.d) {
   dplyr::group_by_(.d, .dots = list())
 }
 
-split.grouped_df <- function(df){
-  split(as.data.frame(df), group_indices(df))
+split.grouped_df <- function(x, ...){
+  if (nargs() == 1) {
+    split(as.data.frame(df), group_indices(df))
+  } else {
+    #use base split if extra arguments are passed
+    split(as.data.frame(df), ...)
+  }
 }
