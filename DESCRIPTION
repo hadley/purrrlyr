@@ -14,8 +14,7 @@ Imports:
     magrittr (>= 1.5),
     dplyr (>= 0.4.3),
     purrr,
-    Rcpp,
-    lazyeval (>= 0.2.0)
+    Rcpp
 Suggests:
     testthat,
     covr
