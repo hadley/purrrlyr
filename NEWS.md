@@ -1,6 +1,8 @@
 
 # purrrlyr 0.0.2.9000
 
+* Fixed a compilation issue with clang and libc++.
+
 
 # purrlyr 0.0.2
 
