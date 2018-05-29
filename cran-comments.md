@@ -1,3 +1,7 @@
+
+This fixes the build issue on the fedora/clang CRAN machine.
+
+
 ## Test environments
 
 * local OS X install, R 3.5.0
@@ -7,7 +11,9 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 note
+0 errors | 0 warnings | 1 note
+
+Lionel Henry is the new maintainer of purrrlyr
 
 
 ## Reverse dependencies
