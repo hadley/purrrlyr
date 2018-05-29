@@ -1,8 +1,22 @@
-# purrrlyr 0.0.1.9000
 
-# purrlyr 0.0.0.9000
+# purrrlyr 0.0.2.9000
 
-All data-frame based mappers have been moved to this package. These functions are not technically deprecated (so you can move to this package as easily as possible), but these functions are unlikely to be changed in the future (i.e. there will be no bug fixes) and are likely to go away in the near future, so we highly recommend updating to new approaches.
+* Fixed a compilation issue with clang and libc++.
+
+
+# purrlyr 0.0.2
+
+CRAN maintenance release.
+
+
+# purrlyr 0.0.1
+
+All data-frame based mappers have been moved to this package. These
+functions are not technically deprecated (so you can move to this
+package as easily as possible), but these functions are unlikely to be
+changed in the future (i.e. there will be no bug fixes) and are likely
+to go away in the near future, so we highly recommend updating to new
+approaches.
 
 * Mapping a function to each column of a data frame should now be
   handled with the colwise mutating and summarising operations in

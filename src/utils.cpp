@@ -76,16 +76,30 @@ CharacterVector get_element_names(const List& x, int i) {
 }
 
 void check_dataframes_names_consistency(const List& x) {
-  CharacterVector ref = get_element_names(x, 0);
-  int equi_named = 1;
-
-  for (int i = 0; i < x.size(); ++i) {
-    CharacterVector names = get_element_names(x, i);
-    equi_named *= std::equal(ref.begin(), ref.end(), names.begin());
+  SEXP ref = get_element_names(x, 0);
+  if (TYPEOF(ref) != STRSXP) {
+    goto error;
   }
 
-  if (!equi_named)
-    stop("data frames do not have consistent names");
+  for (int i = 0; i < x.size(); ++i) {
+    SEXP names = get_element_names(x, i);
+    if (TYPEOF(names) != STRSXP) {
+      goto error;
+    }
+
+    for (int j = 0; j < Rf_length(names); ++j) {
+      SEXP x = STRING_ELT(ref, j);
+      SEXP y = STRING_ELT(names, j);
+      if (strcmp(CHAR(x), CHAR(y))) {
+        goto error;
+      };
+    }
+  }
+
+  return;
+
+ error:
+  stop("data frames do not have consistent names");
 }
 
 
