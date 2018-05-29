@@ -1,5 +1,5 @@
 
-# purrrlyr 0.0.2.9000
+# purrrlyr 0.0.3
 
 * Fixed a compilation issue with clang and libc++.
 
