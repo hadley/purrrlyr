@@ -35,7 +35,7 @@ dmap <- function(.d, .f, ...) {
 }
 
 sliced_dmap <- function(.d, .f, ...) {
-  if (length(.d) <= length(attr(.d, "labels"))) {
+  if (length(.d) <= length(group_labels(.d))) {
     .d
   } else {
     set_sliced_env(.d, TRUE, "rows", "", environment(), ".d")
@@ -64,12 +64,13 @@ dmap_if <- function(.d, .p, .f, ...) {
 }
 
 partial_dmap <- function(.d, .sel, .f, ...) {
-  subset <- structure(.d[.sel],
-    indices = attr(.d, "indices"),
-    class = class(.d)
-  )
+  .f <- as_function(.f)
+  subset <- dplyr::select(.d, !!dplyr::group_vars(.d), !!names(.d)[.sel])
 
-  res <- dmap(subset, .f, ...)
+  set_sliced_env(.d, FALSE, "rows", "", environment(), "slices")
+  slices <- subset_slices(subset)
+  res <- .Call(map_by_slice_impl, environment(), "slices", ".f", slices)
+
   res <- dmap_recycle(res, .d)
   .d[.sel] <- res
 
@@ -93,8 +94,8 @@ dmap_recycle_sliced <- function(res, d) {
     return(res)
   }
 
-  if (nrow(attr(d, "labels")) == nrow(res)) {
-    sizes <- attr(d, "group_sizes")
+  if (nrow(group_labels(d)) == nrow(res)) {
+    sizes <- group_sizes(d)
     indices <- purrr::map2(seq_len(nrow(res)), sizes, ~rep(.x, each = .y))
     res <- res[purrr::flatten_int(indices), ]
     return(res)

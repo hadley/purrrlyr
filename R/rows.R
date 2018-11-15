@@ -75,7 +75,7 @@ by_slice <- function(.d, ..f, ..., .collate = c("list", "rows", "cols"),
   if (!dplyr::is.grouped_df(.d)) {
     stop(".d must be a sliced data frame", call. = FALSE)
   }
-  if (length(.d) <= length(attr(.d, "labels"))) {
+  if (length(.d) <= length(group_labels(.d))) {
     stop("Mappable part of data frame is empty", call. = FALSE)
   }
   .collate <- match.arg(.collate)
@@ -102,12 +102,8 @@ set_sliced_env <- function(df, labels, collate, to, env, x_name) {
   env$.labels <- labels;
   env$.collate <- collate
   env$.to <- to
-  env$.labels_cols <- attr(df, "labels")
+  env$.labels_cols <- group_labels(df)
   env$.slicing_cols <- df[names(env$.labels_cols) %||% character(0)]
-
-  indices <- attr(df, "indices")
-  env[[x_name]] <- df[!names(df) %in% names(env$.labels_cols)]
-  attr(env[[x_name]], "indices") <- indices
 }
 
 
@@ -191,22 +187,13 @@ by_row <- function(.d, ..f, ..., .collate = c("list", "rows", "cols"),
   ..f <- as_rows_function(..f)
   .collate <- match.arg(.collate)
 
-  indices <- seq(0, nrow(.d) - 1) # cpp-style indexing
-  attr(.d, "indices") <- as.list(indices)
-
   .unique_labels <- 0
   .labels_cols <- .d
   .slicing_cols <- .d
 
-  env <- environment()
-  env$.d <- subset_slices(.d)
-  .Call(by_slice_impl, env, ".d", "..f")
-}
+  .d <- lapply(seq_len(nrow(.d)), function(i) .d[i, , drop = FALSE])
 
-subset_slices <- function(data) {
-  indices <- lapply(attr(data, "indices"), `+`, 1L)
-  as_data_frame <- dplyr::as_data_frame
-  lapply(indices, function(x) as_data_frame(data[x, ]))
+  .Call(by_slice_impl, environment(), ".d", "..f")
 }
 
 check_df_consistency <- function(.d) {

@@ -13,8 +13,9 @@ LazyData: true
 Imports:
     magrittr (>= 1.5),
     dplyr (>= 0.4.3),
-    Rcpp
     purrr (>= 0.2.2),
+    Rcpp,
+    tibble
 Suggests:
     testthat,
     covr

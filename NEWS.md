@@ -1,6 +1,7 @@
 
 # purrrlyr 0.0.3.9000
 
+* Compatibility with dplyr 0.8.0.
 * Compatibility with R 3.5.
 
 

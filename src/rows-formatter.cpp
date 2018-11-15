@@ -120,7 +120,10 @@ int ListFormatter::output_size() {
 
 List& Formatter::add_labels(List& out) {
   if (labels_size() > 0) {
-    for (int i = 0; i < labels_.slicing_cols.size(); ++i) {
+    Rcpp::IntegerVector sizes = results_.sizes;
+    int n_labels = labels_.slicing_cols.size();
+
+    for (int i = 0; i < n_labels; ++i) {
       RObject label = labels_.get()[i];
       switch (sexp_type(label)) {
       case LGLSXP:
@@ -130,7 +133,7 @@ List& Formatter::add_labels(List& out) {
       case CPLXSXP:
       case RAWSXP:
       case VECSXP:
-        out[i] = rep_each_n(label, results_.sizes);
+        out[i] = rep_each_n(label, sizes);
         Rf_copyMostAttrib(label, out[i]);
         break;
       default: { stop("internal error: unhandled vector type in REP"); }
