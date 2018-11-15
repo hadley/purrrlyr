@@ -120,22 +120,19 @@ int ListFormatter::output_size() {
 
 List& Formatter::add_labels(List& out) {
   if (labels_size() > 0) {
-#define REP_EACH_N(R_TYPE)                        \
-    case R_TYPE: {                                \
-      out[i] = rep_each_n(label, results_.sizes); \
-      Rf_copyMostAttrib(label, out[i]);           \
-      break;                                      \
-    }
     for (int i = 0; i < labels_.slicing_cols.size(); ++i) {
       RObject label = labels_.get()[i];
       switch (sexp_type(label)) {
-        REP_EACH_N(LGLSXP);
-        REP_EACH_N(INTSXP);
-        REP_EACH_N(REALSXP);
-        REP_EACH_N(STRSXP);
-        REP_EACH_N(CPLXSXP);
-        REP_EACH_N(RAWSXP);
-        REP_EACH_N(VECSXP);
+      case LGLSXP:
+      case INTSXP:
+      case REALSXP:
+      case STRSXP:
+      case CPLXSXP:
+      case RAWSXP:
+      case VECSXP:
+        out[i] = rep_each_n(label, results_.sizes);
+        Rf_copyMostAttrib(label, out[i]);
+        break;
       default: { stop("internal error: unhandled vector type in REP"); }
       }
     }
