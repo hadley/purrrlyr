@@ -1,22 +1,5 @@
 context("rows")
 
-df <- mtcars[1:3, c("wt", "qsec")]
-df[[2]] <- as.character(df[[2]])
-suppressWarnings(grouped <- slice_rows(mtcars[1:2], "cyl"))
-
-gen_alternatives <- function(first, alt) {
-  prev_alt <- TRUE
-  function(...) {
-    if (prev_alt) {
-      out <- first
-    } else {
-      out <- alt
-    }
-    prev_alt <<- !prev_alt
-    out
-  }
-}
-
 test_that("output column is named according to .to", {
   output1 <- mtcars %>% slice_rows("cyl") %>% by_slice(~ list(NULL), .to = "my_col", .labels = FALSE)
   output2 <- mtcars %>% by_row(~ list(NULL), .to = "my_col", .labels = FALSE)
@@ -28,7 +11,6 @@ test_that("output column is named according to .to", {
 })
 
 test_that("empty", {
-  empty <- function(...) numeric(0)
   rows_collation <- invoke_rows(empty, mtcars[1:2], .collate = "rows")
   cols_collation <- invoke_rows(empty, mtcars[1:2], .collate = "cols")
   list_collation <- invoke_rows(empty, mtcars[1:2], .collate = "list")
@@ -43,8 +25,6 @@ test_that("empty", {
 })
 
 test_that("all nulls fail, except with list-collation", {
-  all_nulls <- function(...) NULL
-
   expect_error(invoke_rows(all_nulls, mtcars[1:2], .collate = "rows"))
   expect_error(invoke_rows(all_nulls, mtcars[1:2], .collate = "cols"))
 
@@ -54,7 +34,6 @@ test_that("all nulls fail, except with list-collation", {
 })
 
 test_that("scalars", {
-  scalars <- function(...) paste("a", ..1)
   rows_collation <- invoke_rows(scalars, mtcars[1:2], .collate = "rows")
   cols_collation <- invoke_rows(scalars, mtcars[1:2], .collate = "cols")
   list_collation <- invoke_rows(scalars, mtcars[1:2], .collate = "list")
@@ -71,7 +50,6 @@ test_that("scalars", {
 })
 
 test_that("scalars with some nulls", {
-  scalar_nulls <- gen_alternatives(1L, NULL)
   rows_collation <- invoke_rows(scalar_nulls, mtcars[1:2], .collate = "rows")
   cols_collation <- invoke_rows(scalar_nulls, mtcars[1:2], .collate = "cols")
   list_collation <- invoke_rows(scalar_nulls, mtcars[1:2], .collate = "list")
@@ -85,19 +63,16 @@ test_that("scalars with some nulls", {
   expect_equal(dim(list_collation), c(32, 3))
 
   # Make sure properties are well inferred when first result is NULL
-  scalar_first_nulls <- gen_alternatives(NULL, 1L)
   rows_collation <- invoke_rows(scalar_first_nulls, mtcars[1:2], .collate = "rows")
   expect_equal(rows_collation$.out, rep(1, 16))
 })
 
 test_that("labels are correctly subsetted", {
-  scalar_first_nulls <- gen_alternatives(NULL, 1L)
   rows_collation <- invoke_rows(scalar_first_nulls, mtcars[1:2], .collate = "rows")
   expect_equal(rows_collation[1:2], mtcars[seq(2, 32, 2), 1:2])
 })
 
 test_that("vectors", {
-  vectors <- function(...) paste(letters[1:2], c(...))
   rows_collation <- invoke_rows(vectors, mtcars[1:2], .collate = "rows")
   cols_collation <- invoke_rows(vectors, mtcars[1:2], .collate = "cols")
   list_collation <- invoke_rows(vectors, mtcars[1:2], .collate = "list")
@@ -118,7 +93,6 @@ test_that("vectors", {
 })
 
 test_that("data frames", {
-  dataframes <- function(...) df
   rows_collation <- invoke_rows(dataframes, mtcars[1:2], .collate = "rows")
   cols_collation <- invoke_rows(dataframes, mtcars[1:2], .collate = "cols")
   list_collation <- invoke_rows(dataframes, mtcars[1:2], .collate = "list")
@@ -135,7 +109,6 @@ test_that("data frames", {
 })
 
 test_that("data frames with some nulls/empty", {
-  dataframes_nulls <- gen_alternatives(df, NULL)
   rows_collation <- invoke_rows(dataframes_nulls, mtcars[1:2], .collate = "rows")
   cols_collation <- invoke_rows(dataframes_nulls, mtcars[1:2], .collate = "cols")
   list_collation <- invoke_rows(dataframes_nulls, mtcars[1:2], .collate = "list")
@@ -149,7 +122,6 @@ test_that("data frames with some nulls/empty", {
 })
 
 test_that("empty data frames", {
-  empty_dataframes <- function(...) df[0, ]
   rows_collation_by_row <- invoke_rows(empty_dataframes, mtcars[1:2], .collate = "rows")
   rows_collation_by_slice <- by_slice(grouped, empty_dataframes, .collate = "rows")
 
@@ -161,7 +133,6 @@ test_that("empty data frames", {
 })
 
 test_that("some empty data frames", {
-  some_empty_dataframes <- gen_alternatives(df, df[0, ])
   rows_collation_by_row <- invoke_rows(some_empty_dataframes, mtcars[1:2], .collate = "rows")
   rows_collation_by_slice <- by_slice(grouped, some_empty_dataframes, .collate = "rows")
 
@@ -173,15 +144,11 @@ test_that("some empty data frames", {
 })
 
 test_that("unconsistent data frames fail", {
-  unconsistent_names <- gen_alternatives(df, purrr::set_names(df, 1:2))
-  unconsistent_types <- gen_alternatives(df, purrr::map(df, as.character))
-
   expect_error(invoke_rows(unconsistent_names, mtcars[1:2], .collate = "rows"), "consistent names")
   expect_error(invoke_rows(unconsistent_types, mtcars[1:2], .collate = "rows"), "must return either data frames or vectors")
 })
 
 test_that("objects", {
-  objects <- function(...) function() {}
   list_collation <- invoke_rows(objects, mtcars[1:2], .collate = "list")
 
   expect_equal(list_collation$.out, rep(list(function() {}), 32))
@@ -192,8 +159,6 @@ test_that("objects", {
 })
 
 test_that("collation of ragged objects on cols fails", {
-  ragged_dataframes <- gen_alternatives(df, rbind(df, df))
-  ragged_vectors <- gen_alternatives(letters[1:2], rep(letters[1:2], 2))
   expect_error(invoke_rows(ragged_dataframes, mtcars[1:2], .collate = "cols"))
   expect_error(invoke_rows(ragged_vectors, mtcars[1:2], .collate = "cols"))
 })
