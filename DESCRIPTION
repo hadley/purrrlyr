@@ -13,8 +13,8 @@ LazyData: true
 Imports:
     magrittr (>= 1.5),
     dplyr (>= 0.4.3),
-    purrr,
     Rcpp
+    purrr (>= 0.2.2),
 Suggests:
     testthat,
     covr

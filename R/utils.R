@@ -43,9 +43,5 @@ deprecate <- function(...) {
 }
 
 as_function <- function(...) {
-  if (utils::packageVersion("purrr") > "0.2.2") {
-    purrr::as_mapper(...)
-  } else {
-    purrr::as_function(...)
-  }
+  purrr::as_mapper(...)
 }
