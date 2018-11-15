@@ -11,7 +11,7 @@ SEXP as_data_frame(const SEXP x) {
   );
   Rf_setAttrib(x, Rf_install("row.names"), row_names);
 
-  CharacterVector classes = CharacterVector::create("tbl_df", "data.frame");
+  CharacterVector classes = CharacterVector::create("tbl_df", "tbl", "data.frame");
   Rf_setAttrib(x, R_ClassSymbol, classes);
 
   return x;
