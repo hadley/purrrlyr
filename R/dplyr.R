@@ -1,9 +1,20 @@
 
 delayedAssign("has_recent_dplyr", utils::packageVersion("dplyr") >= "0.7.99")
 
+group_data <- function(...) {
+  stop("tilt")
+}
+delayedAssign("group_data", {
+  if (has_recent_dplyr) {
+    asNamespace("dplyr") $group_data
+  } else {
+    function(...) stop("tilt")
+  }
+})
+
 group_indices <- function(data) {
   if (has_recent_dplyr) {
-    dplyr::group_data(data)$.rows
+    group_data(data)$.rows
   } else {
     lapply(attr(data, "indices"), `+`, 1L)
   }
@@ -11,7 +22,7 @@ group_indices <- function(data) {
 
 group_labels <- function(data) {
   if (has_recent_dplyr) {
-    labels <- dplyr::group_data(data)
+    labels <- group_data(data)
     dplyr::select(labels, -".rows")
   } else {
     tibble::as_tibble(attr(data, "labels"))
@@ -20,7 +31,7 @@ group_labels <- function(data) {
 
 group_sizes <- function(data) {
   if (has_recent_dplyr) {
-    lengths(dplyr::group_data(data)$.rows)
+    lengths(group_data(data)$.rows)
   } else {
     attr(data, "group_sizes")
   }
