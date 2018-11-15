@@ -4,13 +4,12 @@ delayedAssign("has_recent_dplyr", utils::packageVersion("dplyr") >= "0.7.99")
 group_data <- function(...) {
   stop("tilt")
 }
-delayedAssign("group_data", {
+
+.onLoad <- function(...) {
   if (has_recent_dplyr) {
-    asNamespace("dplyr") $group_data
-  } else {
-    function(...) stop("tilt")
+    group_data <<- asNamespace("dplyr")$group_data
   }
-})
+}
 
 group_indices <- function(data) {
   if (has_recent_dplyr) {
