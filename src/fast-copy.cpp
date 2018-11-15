@@ -39,12 +39,21 @@ SEXP rep_each_n(const RObject x, const IntegerVector& times) {
       }
     }
     return out;
-    break;
+  }
+  case VECSXP: {
+    int counter = 0;
+    Shield<SEXP> out(Rf_allocVector(VECSXP, out_size));
+    for (int i = 0; i < x_size; ++i) {
+      for (int j = 0; j < times[i]; ++j) {
+        SET_VECTOR_ELT(out, counter, VECTOR_ELT(x, i));
+        ++counter;
+      }
+    }
+    return out;
   }
   case LGLSXP:  DO_REP_EACH_N(LGLSXP, int, LOGICAL);
   case CPLXSXP: DO_REP_EACH_N(CPLXSXP, Rcomplex, COMPLEX);
   case RAWSXP:  DO_REP_EACH_N(RAWSXP, Rbyte, RAW);
-  case VECSXP:  DO_REP_EACH_N(VECSXP, SEXP, STRING_PTR);
   default: {
     stop("Unsupported type", type2name(x));
     return R_NilValue;

@@ -1,6 +1,8 @@
 
 # purrrlyr 0.0.3.9000
 
+* Compatibility with R 3.5.
+
 
 # purrrlyr 0.0.3
 
