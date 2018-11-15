@@ -20,7 +20,6 @@ SEXP call_loop(SEXP env, SEXP call, int n, SEXPTYPE type) {
   SEXP i_val = PROTECT(Rf_ScalarInteger(1));
   SEXP i = Rf_install("i");
   Rf_defineVar(i, i_val, env);
-  UNPROTECT(1);
 
   SEXP out = PROTECT(Rf_allocVector(type, n));
   for (int i = 0; i < n; ++i) {
@@ -36,7 +35,7 @@ SEXP call_loop(SEXP env, SEXP call, int n, SEXPTYPE type) {
     set_vector_value(out, i, res, 0);
   }
 
-  UNPROTECT(1);
+  UNPROTECT(2);
   return out;
 }
 
@@ -83,8 +82,8 @@ SEXP map2_impl(SEXP env, SEXP x_name_, SEXP y_name_, SEXP f_name_, SEXP type_) {
   SEXP i = Rf_install("i");
   SEXPTYPE type = Rf_str2type(CHAR(Rf_asChar(type_)));
 
-  SEXP x_val = Rf_eval(x, env);
-  SEXP y_val = Rf_eval(y, env);
+  SEXP x_val = PROTECT(Rf_eval(x, env));
+  SEXP y_val = PROTECT(Rf_eval(y, env));
 
   if (!Rf_isVector(x_val) && !Rf_isNull(x_val))
     Rf_errorcall(R_NilValue, "`.x` is not a vector (%s)", Rf_type2char(TYPEOF(x_val)));
@@ -109,14 +108,14 @@ SEXP map2_impl(SEXP env, SEXP x_name_, SEXP y_name_, SEXP f_name_, SEXP type_) {
   SEXP out = PROTECT(call_loop(env, f_call, n, type));
   copy_names(x_val, out);
 
-  UNPROTECT(5);
+  UNPROTECT(7);
   return out;
 }
 
 SEXP pmap_impl(SEXP env, SEXP l_name_, SEXP f_name_, SEXP type_) {
   const char* l_name = CHAR(Rf_asChar(l_name_));
   SEXP l = Rf_install(l_name);
-  SEXP l_val = Rf_eval(l, env);
+  SEXP l_val = PROTECT(Rf_eval(l, env));
   SEXPTYPE type = Rf_str2type(CHAR(Rf_asChar(type_)));
 
   if (!Rf_isVectorList(l_val))
@@ -186,8 +185,10 @@ SEXP pmap_impl(SEXP env, SEXP l_name_, SEXP f_name_, SEXP type_) {
   REPROTECT(f_call = Rf_lcons(f, f_call), fi);
 
   SEXP out = PROTECT(call_loop(env, f_call, n, type));
-  copy_names(VECTOR_ELT(l_val, 0), out);
+  if (Rf_length(l_val)) {
+    copy_names(VECTOR_ELT(l_val, 0), out);
+  }
 
-  UNPROTECT(3);
+  UNPROTECT(4);
   return out;
 }

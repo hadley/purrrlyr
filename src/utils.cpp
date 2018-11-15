@@ -54,7 +54,11 @@ int is_function(const SEXP fun) {
 }
 
 SEXP get_ij_elt(const SEXP x, int i, int j) {
-  return get_vector_elt(get_vector_elt(x, j), i);
+  // For rchk
+  SEXP tmp = PROTECT(get_vector_elt(x, j));
+  tmp = get_vector_elt(tmp, i);
+  UNPROTECT(1);
+  return tmp;
 }
 
 int first_type(const List& results) {
