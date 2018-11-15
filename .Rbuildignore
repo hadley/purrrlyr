@@ -5,3 +5,4 @@
 ^revdep$
 ^codecov\.yml$
 ^CRAN-RELEASE$
+^TAGS$
