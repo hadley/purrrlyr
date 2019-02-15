@@ -12,7 +12,7 @@ License: GPL-3 | file LICENSE
 LazyData: true
 Imports:
     magrittr (>= 1.5),
-    dplyr (>= 0.4.3),
+    dplyr (>= 0.8.0),
     purrr (>= 0.2.2),
     Rcpp,
     tibble
@@ -24,5 +24,5 @@ LinkingTo:
     BH
 URL: https://github.com/hadley/purrrlyr
 BugReports: https://github.com/hadley/purrrlyr/issues
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)

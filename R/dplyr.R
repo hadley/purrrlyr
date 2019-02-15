@@ -1,39 +1,11 @@
 
-delayedAssign("has_recent_dplyr", utils::packageVersion("dplyr") >= "0.7.99")
-
-group_data <- function(...) {
-  stop("tilt")
-}
-
-.onLoad <- function(...) {
-  if (has_recent_dplyr) {
-    group_data <<- asNamespace("dplyr")$group_data
-  }
-}
-
-group_indices <- function(data) {
-  if (has_recent_dplyr) {
-    group_data(data)$.rows
-  } else {
-    lapply(attr(data, "indices"), `+`, 1L)
-  }
-}
-
+#' @importFrom dplyr group_data
 group_labels <- function(data) {
-  if (has_recent_dplyr) {
-    labels <- group_data(data)
-    dplyr::select(labels, -".rows")
-  } else {
-    tibble::as_tibble(attr(data, "labels"))
-  }
+  dplyr::select(group_data(data), -".rows")
 }
 
 group_sizes <- function(data) {
-  if (has_recent_dplyr) {
-    lengths(group_data(data)$.rows)
-  } else {
-    attr(data, "group_sizes")
-  }
+  lengths(group_data(data)$.rows)
 }
 
 subset_slices <- function(data, keep_groups = FALSE) {
@@ -43,6 +15,6 @@ subset_slices <- function(data, keep_groups = FALSE) {
 
   cols <- setdiff(names(data), dplyr::group_vars(data))
 
-  indices <- group_indices(data)
+  indices <- group_data(data)$.rows
   lapply(indices, function(x) data[x, cols])
 }
