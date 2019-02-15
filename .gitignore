@@ -1,3 +1,6 @@
 .Rproj.user
 .Rhistory
 .RData
+revdep/checks*
+revdep/library*
+revdep/data*
