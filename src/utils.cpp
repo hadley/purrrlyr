@@ -80,13 +80,19 @@ SEXP get_element_names(const List& x, int i) {
 }
 
 void check_dataframes_names_consistency(const List& x) {
-  SEXP ref = get_element_names(x, 0);
+  int n_protect = 0;
+
+  SEXP ref = PROTECT(get_element_names(x, 0));
+  ++n_protect;
+
   if (TYPEOF(ref) != STRSXP) {
     goto error;
   }
 
   for (int i = 0; i < x.size(); ++i) {
-    SEXP names = get_element_names(x, i);
+    SEXP names = PROTECT(get_element_names(x, i));
+    ++n_protect;
+
     if (TYPEOF(names) != STRSXP) {
       goto error;
     }
@@ -100,6 +106,7 @@ void check_dataframes_names_consistency(const List& x) {
     }
   }
 
+  UNPROTECT(n_protect);
   return;
 
  error:
