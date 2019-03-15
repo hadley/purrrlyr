@@ -30,12 +30,12 @@ extern "C" SEXP by_slice_impl(SEXP env, SEXP d_name_, SEXP f_name_) {
   BEGIN_RCPP
 
   // Map over that list
-  SEXP results = PROTECT(map_impl(env, d_name_, f_name_, Rf_mkChar("list")));
+  SEXP results = PROTECT(map_impl(env, d_name_, f_name_, PROTECT(Rf_mkChar("list"))));
 
   // Create the output data frame
   results = PROTECT(rows::process_slices(results, env));
 
-  UNPROTECT(2);
+  UNPROTECT(3);
   return results;
   END_RCPP
 }
@@ -43,12 +43,12 @@ extern "C" SEXP by_slice_impl(SEXP env, SEXP d_name_, SEXP f_name_) {
 extern "C" SEXP invoke_rows_impl(SEXP env, SEXP d_name_, SEXP f_name_) {
   BEGIN_RCPP
   // Map in parallel over the rows of the data frame
-  SEXP results = PROTECT(pmap_impl(env, d_name_, f_name_, Rf_mkChar("list")));
+  SEXP results = PROTECT(pmap_impl(env, d_name_, f_name_, PROTECT(Rf_mkChar("list"))));
 
   // Create the output data frame
   results = PROTECT(rows::process_slices(results, env));
 
-  UNPROTECT(2);
+  UNPROTECT(3);
   return results;
   END_RCPP
 }
@@ -61,9 +61,9 @@ extern "C" SEXP map_by_slice_impl(SEXP env, SEXP d_name_, SEXP f_name_, SEXP sli
   // Map over those lists
   for (int i = 0; i < Rf_length(slices); ++i) {
     Rf_defineVar(d, get_vector_elt(slices, i), env);
-    SEXP result = PROTECT(map_impl(env, d_name_, f_name_, Rf_mkChar("list")));
+    SEXP result = PROTECT(map_impl(env, d_name_, f_name_, PROTECT(Rf_mkChar("list"))));
     set_vector_elt(slices, i, as_data_frame(result));
-    UNPROTECT(1);
+    UNPROTECT(2);
   }
 
   // Create the output data frame
