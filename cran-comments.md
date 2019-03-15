@@ -1,5 +1,5 @@
 
-This is a compatibility release for dplyr 0.8.0. It also fixes the rchk issues.
+This fixes the rchk issues.
 
 
 ## Test environments
@@ -16,4 +16,4 @@ This is a compatibility release for dplyr 0.8.0. It also fixes the rchk issues.
 
 ## Reverse dependencies
 
-All 5 reverse dependencies were checked and no problems were found.
+I didn't check reverse dependencies because only `PROTECT()`s were added.

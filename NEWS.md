@@ -1,5 +1,8 @@
 
-# purrrlyr 0.0.4.9000
+# purrrlyr 0.0.5
+
+* Fixed protection issues reported by rchk.
+
 
 # purrrlyr 0.0.4
 
