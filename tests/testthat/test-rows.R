@@ -201,7 +201,7 @@ test_that("error is thrown when no columns to map", {
 })
 
 test_that("grouping list-columns are copied (#9)", {
-  df <- tibble::tibble(x = as.list(1:2))
-  exp <- tibble::tibble(x = list(1L, 2L), .out = list(NA, NA))
+  df <- dplyr::tibble(x = as.list(1:2))
+  exp <- dplyr::tibble(x = list(1L, 2L), .out = list(NA, NA))
   expect_identical(by_row(df, ~NA), exp)
 })
