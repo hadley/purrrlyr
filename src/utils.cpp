@@ -74,7 +74,7 @@ int sexp_type(const SEXP x) {
   return TYPEOF(x);
 }
 
-CharacterVector get_element_names(const List& x, int i) {
+SEXP get_element_names(const List& x, int i) {
   RObject subset(x[i]);
   return Rf_getAttrib(subset, R_NamesSymbol);
 }
