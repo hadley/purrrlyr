@@ -92,6 +92,7 @@ SEXP map2_impl(SEXP env, SEXP x_name_, SEXP y_name_, SEXP f_name_, SEXP type_) {
 
   int nx = Rf_length(x_val), ny = Rf_length(y_val);
   if (nx == 0 || ny == 0) {
+    UNPROTECT(2);
     return Rf_allocVector(type, 0);
   }
   if (nx != ny && !(nx == 1 || ny == 1)) {
@@ -134,6 +135,7 @@ SEXP pmap_impl(SEXP env, SEXP l_name_, SEXP f_name_, SEXP type_) {
     int nj = Rf_length(j_val);
 
     if (nj == 0) {
+      UNPROTECT(1);
       return Rf_allocVector(type, 0);
     } else if (nj > n) {
       n = nj;
