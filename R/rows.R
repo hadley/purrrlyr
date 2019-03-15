@@ -254,12 +254,12 @@ slice_rows <- function(.d, .cols = NULL) {
   }
   stopifnot(is.character(.cols))
 
-  dplyr::group_by_(.d, .dots = lapply(.cols, as.name))
+  dplyr::group_by_at(.d, .cols)
 }
 
 #' @rdname slice_rows
 #' @export
 unslice <- function(.d) {
   deprecate("`unslice()` is deprecated; please use `dplyr::ungroup()` instead.")
-  dplyr::group_by_(.d, .dots = list())
+  dplyr::ungroup(.d)
 }
