@@ -1,27 +1,34 @@
 Package: purrrlyr
 Title: Tools at the Intersection of 'purrr' and 'dplyr'
 Version: 0.0.5.9000
-Authors@R: c(
-    person("Lionel", "Henry", , "lionel@rstudio.com", c("aut", "cre")),
-    person("Hadley", "Wickham", , "hadley@rstudio.com", "ctb"),
-    person("RStudio", role = "cph")
-    )
-Description: Some functions at the intersection of 'dplyr' and 'purrr' that 
-  formerly lived in 'purrr'.
+Authors@R: 
+    c(person(given = "Lionel",
+             family = "Henry",
+             role = c("aut", "cre"),
+             email = "lionel@rstudio.com"),
+      person(given = "Hadley",
+             family = "Wickham",
+             role = "ctb",
+             email = "hadley@rstudio.com"),
+      person(given = "RStudio",
+             role = "cph"))
+Description: Some functions at the intersection of 'dplyr' and
+    'purrr' that formerly lived in 'purrr'.
 License: GPL-3 | file LICENSE
-LazyData: true
+URL: https://github.com/hadley/purrrlyr
+BugReports: https://github.com/hadley/purrrlyr/issues
 Imports:
-    magrittr (>= 1.5),
     dplyr (>= 0.8.0),
+    magrittr (>= 1.5),
     purrr (>= 0.2.2),
     Rcpp
 Suggests:
-    testthat,
-    covr
+    covr,
+    testthat
 LinkingTo:
-    Rcpp,
-    BH
-URL: https://github.com/hadley/purrrlyr
-BugReports: https://github.com/hadley/purrrlyr/issues
-RoxygenNote: 7.1.0
+    BH,
+    Rcpp
+Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
