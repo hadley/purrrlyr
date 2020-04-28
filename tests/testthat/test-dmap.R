@@ -13,7 +13,7 @@ test_that("dmap() works with sliced data frames", {
 
 test_that("dmap() works with no columns to map", {
   res <- mtcars["cyl"] %>% slice_rows("cyl") %>% dmap(mean)
-  expect_equal(res, mtcars["cyl"])
+  expect_equal(res, dplyr::group_by(mtcars["cyl"], cyl))
 })
 
 test_that("dmap() recycles only vectors of length 1", {
