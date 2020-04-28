@@ -23,5 +23,5 @@ LinkingTo:
     BH
 URL: https://github.com/hadley/purrrlyr
 BugReports: https://github.com/hadley/purrrlyr/issues
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
