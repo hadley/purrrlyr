@@ -2,8 +2,8 @@
 
 [![Lifecycle Status](https://img.shields.io/badge/lifecycle-retired-orange.svg)](https://www.tidyverse.org/lifecycle/)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/purrrlyr)](https://cran.r-project.org/package=purrrlyr)
-[![Build Status](https://travis-ci.org/hadley/purrrlyr.svg?branch=master)](https://travis-ci.org/hadley/purrrlyr)
-[![Coverage Status](https://img.shields.io/codecov/c/github/hadley/purrrlyr/master.svg)](https://codecov.io/github/hadley/purrrlyr?branch=master)
+[![R build status](https://github.com/hadley/purrrlyr/workflows/R-CMD-check/badge.svg)](https://github.com/hadley/purrrlyr/actions)
+[![Codecov test coverage](https://codecov.io/gh/hadley/purrrlyr/branch/master/graph/badge.svg)](https://codecov.io/gh/hadley/purrrlyr?branch=master)
 
 purrrlyr contains some functions that lie at the intersection of purrr
 and dplyr. They have been removed from purrr in order to make the
