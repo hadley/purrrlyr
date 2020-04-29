@@ -124,8 +124,14 @@ frame. Groups should be set with <code><a href='slice_rows.html'>slice_rows()</a
 <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>dplyr::group_by()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>by_slice</span>(<span class='no'>.d</span>, <span class='no'>..f</span>, <span class='no'>...</span>, <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span>),
-  <span class='kw'>.to</span> <span class='kw'>=</span> <span class='st'>".out"</span>, <span class='kw'>.labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>by_slice</span>(
+  <span class='no'>.d</span>,
+  <span class='no'>..f</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span>),
+  <span class='kw'>.to</span> <span class='kw'>=</span> <span class='st'>".out"</span>,
+  <span class='kw'>.labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

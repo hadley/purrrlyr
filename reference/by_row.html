@@ -128,11 +128,23 @@ atomic vector, a list-column is created. In all cases,
 format.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>by_row</span>(<span class='no'>.d</span>, <span class='no'>..f</span>, <span class='no'>...</span>, <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span>),
-  <span class='kw'>.to</span> <span class='kw'>=</span> <span class='st'>".out"</span>, <span class='kw'>.labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>by_row</span>(
+  <span class='no'>.d</span>,
+  <span class='no'>..f</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span>),
+  <span class='kw'>.to</span> <span class='kw'>=</span> <span class='st'>".out"</span>,
+  <span class='kw'>.labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>invoke_rows</span>(<span class='no'>.f</span>, <span class='no'>.d</span>, <span class='no'>...</span>, <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span>),
-  <span class='kw'>.to</span> <span class='kw'>=</span> <span class='st'>".out"</span>, <span class='kw'>.labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>invoke_rows</span>(
+  <span class='no'>.f</span>,
+  <span class='no'>.d</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span>),
+  <span class='kw'>.to</span> <span class='kw'>=</span> <span class='st'>".out"</span>,
+  <span class='kw'>.labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
