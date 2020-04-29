@@ -1,5 +1,7 @@
 
-This fixes the rchk issues.
+This is for compatibility of purrrlyr with upcoming dplyr 1.0 release.
+
+AFAIU, the rchk warnings are false positives.
 
 
 ## Test environments
@@ -12,8 +14,3 @@ This fixes the rchk issues.
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
-
-
-## Reverse dependencies
-
-I didn't check reverse dependencies because only `PROTECT()`s were added.
