@@ -6,11 +6,23 @@
 \alias{map_rows}
 \title{Apply a function to each row of a data frame}
 \usage{
-by_row(.d, ..f, ..., .collate = c("list", "rows", "cols"),
-  .to = ".out", .labels = TRUE)
+by_row(
+  .d,
+  ..f,
+  ...,
+  .collate = c("list", "rows", "cols"),
+  .to = ".out",
+  .labels = TRUE
+)
 
-invoke_rows(.f, .d, ..., .collate = c("list", "rows", "cols"),
-  .to = ".out", .labels = TRUE)
+invoke_rows(
+  .f,
+  .d,
+  ...,
+  .collate = c("list", "rows", "cols"),
+  .to = ".out",
+  .labels = TRUE
+)
 }
 \arguments{
 \item{.d}{A data frame.}
