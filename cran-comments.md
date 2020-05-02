@@ -1,7 +1,7 @@
 
 This is for compatibility of purrrlyr with upcoming dplyr 1.0 release.
 
-AFAIU, the rchk warnings are false positives.
+As discussed, we'll fix the rchk warnings in the next release.
 
 
 ## Test environments
