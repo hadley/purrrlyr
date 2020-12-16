@@ -1,5 +1,3 @@
-context("rows")
-
 test_that("output column is named according to .to", {
   output1 <- mtcars %>% slice_rows("cyl") %>% by_slice(~ list(NULL), .to = "my_col", .labels = FALSE)
   output2 <- mtcars %>% by_row(~ list(NULL), .to = "my_col", .labels = FALSE)
@@ -149,13 +147,18 @@ test_that("unconsistent data frames fail", {
 })
 
 test_that("objects", {
-  list_collation <- invoke_rows(objects, mtcars[1:2], .collate = "list")
+  list_collation <- invoke_rows(test_objects, mtcars[1:2], .collate = "list")
 
-  expect_equal(list_collation$.out, rep(list(function() {}), 32))
+  expect_equal(
+    list_collation$.out,
+    rep(list(function() {}), 32),
+    ignore_function_env = TRUE
+  )
+
   expect_equal(dim(list_collation), c(32, 3))
 
-  expect_error(invoke_rows(objects, mtcars[1:2], .collate = "rows"))
-  expect_error(invoke_rows(objects, mtcars[1:2], .collate = "cols"))
+  expect_error(invoke_rows(test_objects, mtcars[1:2], .collate = "rows"))
+  expect_error(invoke_rows(test_objects, mtcars[1:2], .collate = "cols"))
 })
 
 test_that("collation of ragged objects on cols fails", {

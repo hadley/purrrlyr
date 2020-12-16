@@ -1,3 +1,7 @@
+# purrrlyr 0.0.7
+
+* Fixed CRAN checks with r-devel.
+
 
 # purrrlyr 0.0.6
 

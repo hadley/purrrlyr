@@ -1,7 +1,5 @@
-context("dmap")
-
 test_that("dmap() returns a data frame", {
-  expect_is(dmap(mtcars, mean), "data.frame")
+  expect_s3_class(dmap(mtcars, mean), "data.frame")
 })
 
 test_that("dmap() works with sliced data frames", {

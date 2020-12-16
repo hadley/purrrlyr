@@ -22,7 +22,7 @@ empty <- function(...) numeric(0)
 vectors <- function(...) paste(letters[1:2], c(...))
 dataframes <- function(...) df
 empty_dataframes <- function(...) df[0, ]
-objects <- function(...) function() {}
+test_objects <- function(...) function() {}
 
 scalar_nulls <- gen_alternatives(1L, NULL)
 scalar_first_nulls <- gen_alternatives(NULL, 1L)

@@ -1,6 +1,6 @@
 Package: purrrlyr
 Title: Tools at the Intersection of 'purrr' and 'dplyr'
-Version: 0.0.6
+Version: 0.0.7
 Authors@R: 
     c(person(given = "Lionel",
              family = "Henry",
@@ -24,7 +24,7 @@ Imports:
     Rcpp
 Suggests:
     covr,
-    testthat
+    testthat (>= 3.0.0)
 LinkingTo:
     BH,
     Rcpp
@@ -32,3 +32,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Config/testthat/edition: 3
