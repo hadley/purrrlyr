@@ -50,7 +50,7 @@ frame. Groups should be set with \code{slice_rows()} or
 \code{\link[dplyr:do]{dplyr::do()}} function. In combination with
 \code{map()}, \code{by_slice()} is equivalent to
 \code{\link[dplyr:summarise_each]{dplyr::summarise_each()}} and
-\code{\link[dplyr:mutate_each]{dplyr::mutate_each()}}. The distinction between
+\code{\link[dplyr:summarise_each]{dplyr::mutate_each()}}. The distinction between
 mutating and summarising operations is not as important as in dplyr
 because we do not act on the columns separately. The only
 constraint is that the mapped function must return the same number
