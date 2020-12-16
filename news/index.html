@@ -71,13 +71,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">purrrlyr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -87,7 +93,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hadley/purrrlyr/">
-    <span class="fab fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -108,6 +114,14 @@
       <small>Source: <a href='https://github.com/hadley/purrrlyr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="purrrlyr-007" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.7">
+<a href="#purrrlyr-007" class="anchor"></a>purrrlyr 0.0.7<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed CRAN checks with r-devel.</li>
+</ul>
+</div>
     <div id="purrrlyr-006" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.6">
 <a href="#purrrlyr-006" class="anchor"></a>purrrlyr 0.0.6<small> 2020-05-02 </small>
@@ -141,6 +155,23 @@
 <li>Fixed a compilation issue with clang and libc++.</li>
 </ul>
 </div>
+    <div id="purrlyr-002" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.2">
+<a href="#purrlyr-002" class="anchor"></a>purrlyr 0.0.2<small> 2017-05-13 </small>
+</h1>
+<p>CRAN maintenance release.</p>
+</div>
+    <div id="purrlyr-001" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.1">
+<a href="#purrlyr-001" class="anchor"></a>purrlyr 0.0.1<small> 2017-04-29 </small>
+</h1>
+<p>All data-frame based mappers have been moved to this package. These functions are not technically deprecated (so you can move to this package as easily as possible), but these functions are unlikely to be changed in the future (i.e. there will be no bug fixes) and are likely to go away in the near future, so we highly recommend updating to new approaches.</p>
+<ul>
+<li><p>Mapping a function to each column of a data frame should now be handled with the colwise mutating and summarising operations in dplyr instead of <code><a href="../reference/dmap.html">dmap()</a></code>. These are the verbs with suffix <code>_all()</code>, <code>_at()</code> and <code>_if()</code>, such as <code>mutate_all()</code> or <code>summarise_if()</code>. Note that this means the output of <code>.f</code> should conform to the requirements of dplyr operations: same length as the input for mutating operations, and length 1 for summarising operations.</p></li>
+<li><p>Inovking a function row by row with the columns of a data frame as arguments should be done with <code>pmap()</code> followed by <code>dplyr::as_dataframe()</code> instead of <code><a href="../reference/by_row.html">map_rows()</a></code>.</p></li>
+<li><p>Mapping rowwise slices of a data frame with <code><a href="../reference/by_row.html">by_row()</a></code> is deprecated in favour of a combination of tidyverse functions. First use <code>tidyr::nest()</code> to create a list-column containing groupwise data frames. Then use <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> to operate on this list-column. Typically you will want to apply a function on each element (nested data frame) of this list-column with <code><a href="https://purrr.tidyverse.org/reference/map.html">purrr::map()</a></code>.</p></li>
+</ul>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -158,7 +189,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
