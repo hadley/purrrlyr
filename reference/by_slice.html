@@ -81,12 +81,6 @@ dplyr::group_by()." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -96,7 +90,7 @@ dplyr::group_by()." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hadley/purrrlyr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -124,14 +118,14 @@ frame. Groups should be set with <code><a href='slice_rows.html'>slice_rows()</a
 <code><a href='https://dplyr.tidyverse.org/reference/group_by.html'>dplyr::group_by()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>by_slice</span>(
-  <span class='no'>.d</span>,
-  <span class='no'>..f</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span>),
-  <span class='kw'>.to</span> <span class='kw'>=</span> <span class='st'>".out"</span>,
-  <span class='kw'>.labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>by_slice</span><span class='op'>(</span>
+  <span class='va'>.d</span>,
+  <span class='va'>..f</span>,
+  <span class='va'>...</span>,
+  .collate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span><span class='op'>)</span>,
+  .to <span class='op'>=</span> <span class='st'>".out"</span>,
+  .labels <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,9 +190,10 @@ of rows for each variable mapped on.</p>
     <pre class="examples"><div class='input'><span class='co'># Here we fit a regression model inside each slice defined by the</span>
 <span class='co'># unique values of the column "cyl". The fitted models are returned</span>
 <span class='co'># in a list-column.</span>
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice_rows.html'>slice_rows</a></span>(<span class='st'>"cyl"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>by_slice</span>(<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/partial.html'>partial</a></span>(<span class='no'>lm</span>, <span class='no'>mpg</span> ~ <span class='no'>disp</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 2</span><span>
+<span class='va'>mtcars</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='slice_rows.html'>slice_rows</a></span><span class='op'>(</span><span class='st'>"cyl"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>by_slice</span><span class='op'>(</span><span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/partial.html'>partial</a></span><span class='op'>(</span><span class='va'>lm</span>, <span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>disp</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 3 x 2</span><span>
 #&gt;     cyl .out  
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     4 </span><span style='color: #555555;'>&lt;lm&gt;</span><span>  
@@ -211,8 +206,9 @@ of rows for each variable mapped on.</p>
 <span class='co'># used indistinctly.</span>
 
 <span class='co'># Mutating operation:</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='slice_rows.html'>slice_rows</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"am"</span>))
-<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>by_slice</span>(<span class='no'>dmap</span>, ~ <span class='no'>.x</span> / <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>.x</span>), <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='st'>"rows"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 11</span><span>
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='slice_rows.html'>slice_rows</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cyl"</span>, <span class='st'>"am"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>by_slice</span><span class='op'>(</span><span class='va'>dmap</span>, <span class='op'>~</span> <span class='va'>.x</span> <span class='op'>/</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>.x</span><span class='op'>)</span>, .collate <span class='op'>=</span> <span class='st'>"rows"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 11</span><span>
 #&gt;      cyl    am   mpg   disp     hp  drat     wt  qsec    vs  gear   carb
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     4     0 0.355 0.360  0.244  0.326 0.362  0.318 0.333 0.364 0.4   
@@ -227,7 +223,8 @@ of rows for each variable mapped on.</p>
 #&gt; </span><span style='color: #555555;'>10</span><span>     4     1 0.135 0.127  0.173  0.113 0.092</span><span style='text-decoration: underline;'>6</span><span> 0.114 0.143 0.147 0.167 
 #&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'>
 <span class='co'># Summarising operation:</span>
-<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'>by_slice</span>(<span class='no'>dmap</span>, <span class='no'>mean</span>, <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='st'>"rows"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 11</span><span>
+<span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'>by_slice</span><span class='op'>(</span><span class='va'>dmap</span>, <span class='va'>mean</span>, .collate <span class='op'>=</span> <span class='st'>"rows"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 11</span><span>
 #&gt;     cyl    am   mpg  disp    hp  drat    wt  qsec    vs  gear  carb
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     4     0  22.9 136.   84.7  3.77  2.94  21.0 1      3.67  1.67
@@ -237,7 +234,8 @@ of rows for each variable mapped on.</p>
 #&gt; </span><span style='color: #555555;'>5</span><span>     8     0  15.0 358.  194.   3.12  4.10  17.1 0      3     3.08
 #&gt; </span><span style='color: #555555;'>6</span><span>     8     1  15.4 326   300.   3.88  3.37  14.6 0      5     6   </div><div class='input'>
 <span class='co'># Note that mapping columns within slices is best handled by dmap():</span>
-<span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='dmap.html'>dmap</a></span>(~ <span class='no'>.x</span> / <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>.x</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 11</span><span>
+<span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='dmap.html'>dmap</a></span><span class='op'>(</span><span class='op'>~</span> <span class='va'>.x</span> <span class='op'>/</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>.x</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 11</span><span>
 #&gt;      cyl    am   mpg   disp     hp  drat     wt  qsec    vs  gear   carb
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     4     0 0.355 0.360  0.244  0.326 0.362  0.318 0.333 0.364 0.4   
@@ -250,7 +248,8 @@ of rows for each variable mapped on.</p>
 #&gt; </span><span style='color: #555555;'> 8</span><span>     4     1 0.122 0.105  0.101  0.122 0.118  0.128 0.143 0.118 0.083</span><span style='text-decoration: underline;'>3</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span>     4     1 0.116 0.161  0.139  0.132 0.131  0.113 0     0.147 0.167 
 #&gt; </span><span style='color: #555555;'>10</span><span>     4     1 0.135 0.127  0.173  0.113 0.092</span><span style='text-decoration: underline;'>6</span><span> 0.114 0.143 0.147 0.167 
-#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'><span class='no'>df</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='dmap.html'>dmap</a></span>(<span class='no'>mean</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 11</span><span>
+#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'><span class='va'>df</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='dmap.html'>dmap</a></span><span class='op'>(</span><span class='va'>mean</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 11</span><span>
 #&gt;     cyl    am   mpg  disp    hp  drat    wt  qsec    vs  gear  carb
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span>     4     0  22.9 136.   84.7  3.77  2.94  21.0 1      3.67  1.67
@@ -261,11 +260,12 @@ of rows for each variable mapped on.</p>
 #&gt; </span><span style='color: #555555;'>6</span><span>     8     1  15.4 326   300.   3.88  3.37  14.6 0      5     6   </div><div class='input'>
 <span class='co'># If you don't need the slicing variables as identifiers, switch</span>
 <span class='co'># .labels to FALSE:</span>
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='slice_rows.html'>slice_rows</a></span>(<span class='st'>"cyl"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>by_slice</span>(<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/partial.html'>partial</a></span>(<span class='no'>lm</span>, <span class='no'>mpg</span> ~ <span class='no'>disp</span>), <span class='kw'>.labels</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/flatten.html'>flatten</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>coef</span>)</div><div class='output co'>#&gt; [[1]]
+<span class='va'>mtcars</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='slice_rows.html'>slice_rows</a></span><span class='op'>(</span><span class='st'>"cyl"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>by_slice</span><span class='op'>(</span><span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/partial.html'>partial</a></span><span class='op'>(</span><span class='va'>lm</span>, <span class='va'>mpg</span> <span class='op'>~</span> <span class='va'>disp</span><span class='op'>)</span>, .labels <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/flatten.html'>flatten</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>coef</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [[1]]
 #&gt; (Intercept)        disp 
 #&gt;  40.8719553  -0.1351418 
 #&gt; 
@@ -292,7 +292,7 @@ of rows for each variable mapped on.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -83,12 +83,6 @@ format." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -98,7 +92,7 @@ format." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/hadley/purrrlyr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -128,23 +122,23 @@ atomic vector, a list-column is created. In all cases,
 format.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>by_row</span>(
-  <span class='no'>.d</span>,
-  <span class='no'>..f</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span>),
-  <span class='kw'>.to</span> <span class='kw'>=</span> <span class='st'>".out"</span>,
-  <span class='kw'>.labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+    <pre class="usage"><span class='fu'>by_row</span><span class='op'>(</span>
+  <span class='va'>.d</span>,
+  <span class='va'>..f</span>,
+  <span class='va'>...</span>,
+  .collate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span><span class='op'>)</span>,
+  .to <span class='op'>=</span> <span class='st'>".out"</span>,
+  .labels <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>invoke_rows</span>(
-  <span class='no'>.f</span>,
-  <span class='no'>.d</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span>),
-  <span class='kw'>.to</span> <span class='kw'>=</span> <span class='st'>".out"</span>,
-  <span class='kw'>.labels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+<span class='fu'>invoke_rows</span><span class='op'>(</span>
+  <span class='va'>.f</span>,
+  <span class='va'>.d</span>,
+  <span class='va'>...</span>,
+  .collate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"list"</span>, <span class='st'>"rows"</span>, <span class='st'>"cols"</span><span class='op'>)</span>,
+  .to <span class='op'>=</span> <span class='st'>".out"</span>,
+  .labels <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -217,7 +211,8 @@ this is that <code>invoke_rows()</code> is equivalent to using
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># ..f should be able to work with a list or a data frame. As it</span>
 <span class='co'># happens, sum() handles data frame so the following works:</span>
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>by_row</span>(<span class='no'>sum</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 32 x 12</span><span>
+<span class='va'>mtcars</span> <span class='op'>%&gt;%</span> <span class='fu'>by_row</span><span class='op'>(</span><span class='va'>sum</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 32 x 12</span><span>
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .out     
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
 #&gt; </span><span style='color: #555555;'> 1</span><span>  21       6  160    110  3.9   2.62  16.5     0     1     4     4 </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
@@ -233,7 +228,8 @@ this is that <code>invoke_rows()</code> is equivalent to using
 #&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'>
 <span class='co'># Other functions such as mean() may need to be adjusted with one</span>
 <span class='co'># of the lift_xy() helpers:</span>
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>by_row</span>(<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/lift.html'>lift_vl</a></span>(<span class='no'>mean</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 12</span><span>
+<span class='va'>mtcars</span> <span class='op'>%&gt;%</span> <span class='fu'>by_row</span><span class='op'>(</span><span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/lift.html'>lift_vl</a></span><span class='op'>(</span><span class='va'>mean</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 12</span><span>
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .out     
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
 #&gt; </span><span style='color: #555555;'> 1</span><span>  21       6  160    110  3.9   2.62  16.5     0     1     4     4 </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
@@ -250,7 +246,8 @@ this is that <code>invoke_rows()</code> is equivalent to using
 <span class='co'># To run a function with invoke_rows(), make sure it is variadic (that</span>
 <span class='co'># it accepts dots) or that .f's signature is compatible with the</span>
 <span class='co'># column names</span>
-<span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>invoke_rows</span>(<span class='kw'>.f</span> <span class='kw'>=</span> <span class='no'>sum</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 12</span><span>
+<span class='va'>mtcars</span> <span class='op'>%&gt;%</span> <span class='fu'>invoke_rows</span><span class='op'>(</span>.f <span class='op'>=</span> <span class='va'>sum</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 12</span><span>
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .out     
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
 #&gt; </span><span style='color: #555555;'> 1</span><span>  21       6  160    110  3.9   2.62  16.5     0     1     4     4 </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
@@ -263,7 +260,8 @@ this is that <code>invoke_rows()</code> is equivalent to using
 #&gt; </span><span style='color: #555555;'> 8</span><span>  24.4     4  147.    62  3.69  3.19  20       1     0     4     2 </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span>  22.8     4  141.    95  3.92  3.15  22.9     1     0     4     2 </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span>  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4 </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'><span class='no'>mtcars</span> <span class='kw'>%&gt;%</span> <span class='fu'>invoke_rows</span>(<span class='kw'>.f</span> <span class='kw'>=</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/lift.html'>lift_vd</a></span>(<span class='no'>mean</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 12</span><span>
+#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'><span class='va'>mtcars</span> <span class='op'>%&gt;%</span> <span class='fu'>invoke_rows</span><span class='op'>(</span>.f <span class='op'>=</span> <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/lift.html'>lift_vd</a></span><span class='op'>(</span><span class='va'>mean</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 12</span><span>
 #&gt;      mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb .out     
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
 #&gt; </span><span style='color: #555555;'> 1</span><span>  21       6  160    110  3.9   2.62  16.5     0     1     4     4 </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
@@ -278,8 +276,9 @@ this is that <code>invoke_rows()</code> is equivalent to using
 #&gt; </span><span style='color: #555555;'>10</span><span>  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4 </span><span style='color: #555555;'>&lt;dbl [1]&gt;</span><span>
 #&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'>
 <span class='co'># invoke_rows() with cols collation is equivalent to plyr::mdply()</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span>(<span class='kw'>mean</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>10</span>))
-<span class='no'>p</span> <span class='kw'>%&gt;%</span> <span class='fu'>invoke_rows</span>(<span class='kw'>.f</span> <span class='kw'>=</span> <span class='no'>rnorm</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='st'>"cols"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 50 x 7</span><span>
+<span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span><span class='op'>(</span>mean <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, sd <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, length <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>p</span> <span class='op'>%&gt;%</span> <span class='fu'>invoke_rows</span><span class='op'>(</span>.f <span class='op'>=</span> <span class='va'>rnorm</span>, n <span class='op'>=</span> <span class='fl'>5</span>, .collate <span class='op'>=</span> <span class='st'>"cols"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 50 x 7</span><span>
 #&gt;     mean    sd .out1 .out2 .out3 .out4 .out5
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>     1 0     1      1    1     1      1   
@@ -292,13 +291,14 @@ this is that <code>invoke_rows()</code> is equivalent to using
 #&gt; </span><span style='color: #555555;'> 8</span><span>     3 0.111 2.94   3.07 3.23  2.82   3.06
 #&gt; </span><span style='color: #555555;'> 9</span><span>     4 0.111 3.79   3.94 3.99  4.06   3.90
 #&gt; </span><span style='color: #555555;'>10</span><span>     5 0.111 5.05   5.04 4.86  5.08   5.21
-#&gt; </span><span style='color: #555555;'># … with 40 more rows</span><span></div><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>p</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>plyr</span><span class='kw ns'>::</span><span class='fu'>mdply</span>(<span class='no'>rnorm</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/tbl_df.html'>tbl_df</a></span>()
-}
+#&gt; </span><span style='color: #555555;'># … with 40 more rows</span><span></div><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>p</span> <span class='op'>%&gt;%</span> <span class='fu'>plyr</span><span class='fu'>::</span><span class='fu'>mdply</span><span class='op'>(</span><span class='va'>rnorm</span>, n <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/tbl_df.html'>tbl_df</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
 
 <span class='co'># To integrate the result as part of the data frame, use rows or</span>
 <span class='co'># cols collation:</span>
-<span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>2</span>] <span class='kw'>%&gt;%</span> <span class='fu'>by_row</span>(<span class='kw'>function</span>(<span class='no'>x</span>) <span class='fl'>1</span>:<span class='fl'>5</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 3</span><span>
+<span class='va'>mtcars</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>%&gt;%</span> <span class='fu'>by_row</span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 3</span><span>
 #&gt;      mpg   cyl .out     
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   
 #&gt; </span><span style='color: #555555;'> 1</span><span>  21       6 </span><span style='color: #555555;'>&lt;int [5]&gt;</span><span>
@@ -311,7 +311,8 @@ this is that <code>invoke_rows()</code> is equivalent to using
 #&gt; </span><span style='color: #555555;'> 8</span><span>  24.4     4 </span><span style='color: #555555;'>&lt;int [5]&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span>  22.8     4 </span><span style='color: #555555;'>&lt;int [5]&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span>  19.2     6 </span><span style='color: #555555;'>&lt;int [5]&gt;</span><span>
-#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'><span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>2</span>] <span class='kw'>%&gt;%</span> <span class='fu'>by_row</span>(<span class='kw'>function</span>(<span class='no'>x</span>) <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='st'>"rows"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 160 x 4</span><span>
+#&gt; </span><span style='color: #555555;'># … with 22 more rows</span><span></div><div class='input'><span class='va'>mtcars</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>%&gt;%</span> <span class='fu'>by_row</span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, .collate <span class='op'>=</span> <span class='st'>"rows"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 160 x 4</span><span>
 #&gt;      mpg   cyl  .row  .out
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>    21     6     1     1
@@ -324,7 +325,8 @@ this is that <code>invoke_rows()</code> is equivalent to using
 #&gt; </span><span style='color: #555555;'> 8</span><span>    21     6     2     3
 #&gt; </span><span style='color: #555555;'> 9</span><span>    21     6     2     4
 #&gt; </span><span style='color: #555555;'>10</span><span>    21     6     2     5
-#&gt; </span><span style='color: #555555;'># … with 150 more rows</span><span></div><div class='input'><span class='no'>mtcars</span>[<span class='fl'>1</span>:<span class='fl'>2</span>] <span class='kw'>%&gt;%</span> <span class='fu'>by_row</span>(<span class='kw'>function</span>(<span class='no'>x</span>) <span class='fl'>1</span>:<span class='fl'>5</span>, <span class='kw'>.collate</span> <span class='kw'>=</span> <span class='st'>"cols"</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 7</span><span>
+#&gt; </span><span style='color: #555555;'># … with 150 more rows</span><span></div><div class='input'><span class='va'>mtcars</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>%&gt;%</span> <span class='fu'>by_row</span><span class='op'>(</span><span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, .collate <span class='op'>=</span> <span class='st'>"cols"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 32 x 7</span><span>
 #&gt;      mpg   cyl .out1 .out2 .out3 .out4 .out5
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>  21       6     1     2     3     4     5
@@ -353,7 +355,7 @@ this is that <code>invoke_rows()</code> is equivalent to using
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
