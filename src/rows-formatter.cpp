@@ -1,5 +1,4 @@
 #include <Rcpp.h>
-#include <boost/lexical_cast.hpp>
 #include "utils.h"
 #include "fast-copy.h"
 #include "rows-data.h"
@@ -331,7 +330,7 @@ CharacterVector& RowsFormatter::create_colnames(CharacterVector& out_names) {
 CharacterVector& ColsFormatter::add_cols_binded_vectors_colnames(CharacterVector& out_names) {
   for (int i = 0; i < results_.first_size; ++i) {
     out_names[labels_size() + i] =
-      settings_.output_colname + boost::lexical_cast<std::string>(i + 1);
+      settings_.output_colname + std::to_string(i + 1);
   }
 
   return out_names;
@@ -346,7 +345,7 @@ CharacterVector& ColsFormatter::add_cols_binded_dataframes_colnames(CharacterVec
   for (int col = 0, counter = 0; col < n_cols_results; ++col) {
     for (int row = 0; row < n_rows_results; ++row) {
       out_names[labels_size() + counter] =
-        (std::string) names[col] + boost::lexical_cast<std::string>(row + 1);
+        (std::string) names[col] + std::to_string(row + 1);
       ++counter;
     }
   }
