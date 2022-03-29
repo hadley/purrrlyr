@@ -1,5 +1,7 @@
 # purrrlyr (development version)
 
+* Fixes for CRAN checks.
+
 * purrrlyr no longer depends on BH headers.
 
 
