@@ -3,8 +3,8 @@
 <!-- badges: start -->
 [![Lifecycle: superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/purrrlyr)](https://cran.r-project.org/package=purrrlyr)
-[![R build status](https://github.com/hadley/purrrlyr/workflows/R-CMD-check/badge.svg)](https://github.com/hadley/purrrlyr/actions)
 [![Codecov test coverage](https://codecov.io/gh/hadley/purrrlyr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/hadley/purrrlyr?branch=master)
+[![R-CMD-check](https://github.com/hadley/purrrlyr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hadley/purrrlyr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 purrrlyr contains some functions that lie at the intersection of purrr
