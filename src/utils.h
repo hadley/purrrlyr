@@ -15,11 +15,11 @@ void check_dataframes_names_consistency(const Rcpp::List& x);
 void check_dataframes_types_consistency(const Rcpp::List& x);
 
 // Predicates for iterator algorithms
-struct is_non_null : std::unary_function<SEXP, bool> {
+struct is_non_null : std::function<bool(SEXP)> {
   bool operator()(const SEXP x) {return !Rf_isNull(x);}
 };
 
-struct is_empty : std::unary_function<SEXP, bool> {
+struct is_empty : std::function<bool(SEXP)> {
   bool operator()(const SEXP x) {return Rf_length(x) == 0;}
 };
 
