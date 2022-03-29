@@ -1,13 +1,14 @@
 #ifndef ROWSFORMATTER_H
 #define ROWSFORMATTER_H
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
+
 
 namespace rows {
 
 
 class Formatter;
-typedef boost::shared_ptr<Formatter> FormatterPtr;
+typedef std::shared_ptr<Formatter> FormatterPtr;
 
 class Formatter {
  public:
