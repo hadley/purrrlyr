@@ -10,8 +10,8 @@ Authors@R:
              family = "Wickham",
              role = "ctb",
              email = "hadley@posit.co"),
-      person(given = "Posit, PBC",
-             role = c("cph", "fnd")))
+      person("Posit Software, PBC", role = c("cph", "fnd"),
+             comment = c(ROR = "03wc8by49")))
 Description: Some functions at the intersection of 'dplyr' and
     'purrr' that formerly lived in 'purrr'.
 License: GPL-3 | file LICENSE
@@ -29,6 +29,6 @@ LinkingTo:
     Rcpp
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Config/testthat/edition: 3
 Config/build/compilation-database: true

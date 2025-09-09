@@ -6,7 +6,7 @@
 #' `dmap_at()` and `dmap_if()` recycle length 1 vectors to
 #' the group sizes.
 #' @inheritParams purrr::map
-#' @inheritParams purrr::as_function
+#' @inheritParams rlang::as_function
 #' @inheritParams purrr::map_if
 #' @param .d A data frame.
 #' @export
