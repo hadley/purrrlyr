@@ -132,10 +132,10 @@ set_sliced_env <- function(df, labels, collate, to, env, x_name) {
 #' The distinction between `by_row()` and `invoke_rows()` is
 #' that the former passes a data frame to `..f` while the latter
 #' maps the columns to its function call. This is essentially like
-#' using [invoke()] with each row. Another way to view
+#' using `invoke()` with each row. Another way to view
 #' this is that `invoke_rows()` is equivalent to using
 #' `by_row()` with a function lifted to accept dots (see
-#' [lift()]).
+#' `lift()`).
 #'
 #' @param .d A data frame.
 #' @param .f,..f A function to apply to each row. If `..f` does

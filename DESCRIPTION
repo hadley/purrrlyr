@@ -1,7 +1,7 @@
 Package: purrrlyr
 Title: Tools at the Intersection of 'purrr' and 'dplyr'
-Version: 0.0.8.9000
-Authors@R: 
+Version: 0.0.9
+Authors@R:
     c(person(given = "Lionel",
              family = "Henry",
              role = c("aut", "cre"),
@@ -27,9 +27,8 @@ Suggests:
     testthat (>= 3.0.0)
 LinkingTo:
     Rcpp
-SystemRequirements:
-    C++11
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3
+Config/build/compilation-database: true

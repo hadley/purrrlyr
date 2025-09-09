@@ -1,7 +1,6 @@
 // These routines were adapted from Kevin Ushey's code in hadley/reshape
 
 #include <Rcpp.h>
-#include "utils.h"
 
 using namespace Rcpp;
 
@@ -86,16 +85,21 @@ SEXP copy_elements(const RObject from, int offset_from,
   switch (from.sexp_type()) {
   case INTSXP:  DO_COPY(int, INTEGER);
   case REALSXP: DO_COPY(double, REAL);
+  case LGLSXP:  DO_COPY(int, LOGICAL);
+  case CPLXSXP: DO_COPY(Rcomplex, COMPLEX);
+  case RAWSXP:  DO_COPY(Rbyte, RAW);
   case STRSXP:
     for (int i = offset_to, j = 0; j < n; ++i, ++j) {
       SET_STRING_ELT(to, i, STRING_ELT(from, j + offset_from));
     }
     return to;
     break;
-  case LGLSXP:  DO_COPY(int, LOGICAL);
-  case CPLXSXP: DO_COPY(Rcomplex, COMPLEX);
-  case RAWSXP:  DO_COPY(Rbyte, RAW);
-  case VECSXP:  DO_COPY(SEXP, STRING_PTR);
+  case VECSXP:
+    for (int i = offset_to, j = 0; j < n; ++i, ++j) {
+      SET_VECTOR_ELT(to, i, VECTOR_ELT(from, j + offset_from));
+    }
+    return to;
+    break;
   default:
     stop("Unsupported type", type2name(from));
     return R_NilValue;
