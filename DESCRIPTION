@@ -5,13 +5,13 @@ Authors@R:
     c(person(given = "Lionel",
              family = "Henry",
              role = c("aut", "cre"),
-             email = "lionel@rstudio.com"),
+             email = "lionel@posit.co"),
       person(given = "Hadley",
              family = "Wickham",
              role = "ctb",
-             email = "hadley@rstudio.com"),
-      person(given = "RStudio",
-             role = "cph"))
+             email = "hadley@posit.co"),
+      person(given = "Posit, PBC",
+             role = c("cph", "fnd")))
 Description: Some functions at the intersection of 'dplyr' and
     'purrr' that formerly lived in 'purrr'.
 License: GPL-3 | file LICENSE
