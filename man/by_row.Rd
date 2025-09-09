@@ -76,10 +76,10 @@ argument.
 The distinction between \code{by_row()} and \code{invoke_rows()} is
 that the former passes a data frame to \code{..f} while the latter
 maps the columns to its function call. This is essentially like
-using \code{\link[=invoke]{invoke()}} with each row. Another way to view
+using \code{invoke()} with each row. Another way to view
 this is that \code{invoke_rows()} is equivalent to using
 \code{by_row()} with a function lifted to accept dots (see
-\code{\link[=lift]{lift()}}).
+\code{lift()}).
 }
 \examples{
 # ..f should be able to work with a list or a data frame. As it
