@@ -1,7 +1,6 @@
 // These routines were adapted from Kevin Ushey's code in hadley/reshape
 
 #include <Rcpp.h>
-#include "utils.h"
 
 using namespace Rcpp;
 

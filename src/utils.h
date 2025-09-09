@@ -1,6 +1,9 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <Rcpp.h>
+#include <Rinternals.h>
+
 SEXP shadow_call(const SEXP fun, SEXP arg, SEXP dots, const SEXP env = R_NilValue);
 SEXP as_data_frame(SEXP x);
 int is_atomic(const SEXP x);

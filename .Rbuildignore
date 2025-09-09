@@ -8,3 +8,5 @@
 ^TAGS$
 ^\.github$
 ^CRAN-SUBMISSION$
+^compile_commands.json$
+^\.cache$
