@@ -1,4 +1,7 @@
-# purrrlyr (development version)
+# purrrlyr 0.0.9
+
+* Fixes for CRAN checks.
+
 
 # purrrlyr 0.0.8
 
