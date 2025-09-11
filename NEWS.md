@@ -1,3 +1,8 @@
+# purrrlyr 0.0.10
+
+* Fixes for CRAN checks.
+
+
 # purrrlyr 0.0.9
 
 * Fixes for CRAN checks.
