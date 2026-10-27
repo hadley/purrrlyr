@@ -15,7 +15,7 @@ test_that("empty", {
 
   expect_equal(rows_collation$.out, numeric(0))
   expect_equal(cols_collation$.out, numeric(0))
-  expect_equal(list_collation$.out, purrr::rerun(32, numeric(0)))
+  expect_equal(list_collation$.out, lapply(seq_len(32), function(i) numeric(0)))
 
   expect_equal(dim(rows_collation), c(0, 3))
   expect_equal(dim(cols_collation), c(0, 3))
@@ -96,10 +96,10 @@ test_that("data frames", {
   list_collation <- invoke_rows(dataframes, mtcars[1:2], .collate = "list")
 
   expect_equal(rows_collation$.row, rep(1:32, each = 3))
-  expect_equal(rows_collation[4:5], dplyr::as_tibble(dplyr::bind_rows(purrr::rerun(32, df))))
+  expect_equal(rows_collation[4:5], dplyr::as_tibble(dplyr::bind_rows(lapply(seq_len(32), function(i) df))))
   expect_equal(cols_collation[[3]], rep(df[[1]][1], 32))
   expect_equal(cols_collation[[8]], rep(df[[2]][3], 32))
-  expect_equal(list_collation$.out, purrr::rerun(32, df))
+  expect_equal(list_collation$.out, lapply(seq_len(32), function(i) df))
 
   expect_equal(dim(rows_collation), c(96, 5))
   expect_equal(dim(cols_collation), c(32, 8))
@@ -111,7 +111,7 @@ test_that("data frames with some nulls/empty", {
   cols_collation <- invoke_rows(dataframes_nulls, mtcars[1:2], .collate = "cols")
   list_collation <- invoke_rows(dataframes_nulls, mtcars[1:2], .collate = "list")
 
-  expect_equal(rows_collation[4:5], dplyr::as_tibble(dplyr::bind_rows(purrr::rerun(16, df))))
+  expect_equal(rows_collation[4:5], dplyr::as_tibble(dplyr::bind_rows(lapply(seq_len(16), function(i) df))))
   expect_equal(list_collation$.out, rep(list(df, NULL), 16))
 
   expect_equal(dim(rows_collation), c(48, 5))
@@ -134,8 +134,8 @@ test_that("some empty data frames", {
   rows_collation_by_row <- invoke_rows(some_empty_dataframes, mtcars[1:2], .collate = "rows")
   rows_collation_by_slice <- by_slice(grouped, some_empty_dataframes, .collate = "rows")
 
-  expect_equal(rows_collation_by_row[4:5], dplyr::as_tibble(dplyr::bind_rows(purrr::rerun(16, df))))
-  expect_equal(rows_collation_by_slice[2:3], dplyr::as_tibble(dplyr::bind_rows(purrr::rerun(2, df))))
+  expect_equal(rows_collation_by_row[4:5], dplyr::as_tibble(dplyr::bind_rows(lapply(seq_len(16), function(i) df))))
+  expect_equal(rows_collation_by_slice[2:3], dplyr::as_tibble(dplyr::bind_rows(lapply(seq_len(2), function(i) df))))
 
   expect_equal(dim(rows_collation_by_row), c(48, 5))
   expect_equal(dim(rows_collation_by_slice), c(6, 3))

@@ -88,7 +88,7 @@ mtcars \%>\% by_row(sum)
 
 # Other functions such as mean() may need to be adjusted with one
 # of the lift_xy() helpers:
-mtcars \%>\% by_row(purrr::lift_vl(mean))
+mtcars \%>\% by_row(function(x) mean(unlist(x)))
 
 # To run a function with invoke_rows(), make sure it is variadic (that
 # it accepts dots) or that .f's signature is compatible with the
